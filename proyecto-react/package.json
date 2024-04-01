@@ -8,8 +8,6 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore",
     "preview": "vite preview",
-    "vite:start": "vite",
-    "vite:build": "vite build",
     "test": "vitest",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\""
   },
