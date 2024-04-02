@@ -21,13 +21,11 @@ const DateComponent = () => {
 
     // Renderiza la fecha y la hora
     return (
-        <>
-            <div>
-                <h1>Fecha: {date}</h1>
-                <h1>Hora: {time}</h1>
-            </div>
-            <Link to={'/'}>GO HOME</Link> <br />
-        </>
+        <div>
+            <h1>Fecha: {date}</h1>
+            <h1>Hora: {time}</h1>
+            <Link to="/">GO HOME</Link>
+        </div>
     );
 };
 
