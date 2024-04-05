@@ -4,6 +4,9 @@ stages:
   - build
   - test
 
+before_script:
+  - cd proyecto-react
+
 build:
   stage: build
   script:
@@ -14,6 +17,7 @@ build:
 test:
   stage: test
   script:
+    - npm install
     - npm run lint
     - npm run test
     - npx @sentry/cli releases -o ale-aguiar-diaz -p proyecto-react deploys $CI_COMMIT_SHORT_SHA new -e staging
