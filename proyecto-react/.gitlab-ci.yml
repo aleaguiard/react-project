@@ -22,3 +22,8 @@ test:
     - npm run lint
     - npm run test
     - npm run test || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de prueba"
+
+after_script:
+  - sentry-cli releases new $(sentry-cli releases propose-version)
+  - sentry-cli releases set-commits $(sentry-cli releases propose-version) --auto
+  - sentry-cli releases finalize $(sentry-cli releases propose-version)
