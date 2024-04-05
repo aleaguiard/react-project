@@ -6,13 +6,14 @@ stages:
 
 before_script:
   - cd proyecto-react
+  - npm install -g @sentry/cli
 
 build:
   stage: build
   script:
     - npm install
     - npm run build
-    - node build.js || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de compilación"
+    - npm run build || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de compilación"
 
 test:
   stage: test
@@ -20,4 +21,4 @@ test:
     - npm install
     - npm run lint
     - npm run test
-    - npm test || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de prueba"
+    - npm run test || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de prueba"
