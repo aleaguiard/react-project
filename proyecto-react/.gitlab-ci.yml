@@ -7,22 +7,24 @@ stages:
 before_script:
   - cd proyecto-react
   - npm install -g @sentry/cli
+  - sentry-cli login --auth-token $SENTRY_AUTH_TOKEN
+  - sentry-cli send-event -m "Conexión de prueba exitosa"
 
 build:
   stage: build
   script:
     - npm install
-    - npm run build || sentry-cli send-event -m "Error de compilación" --auth-token $SENTRY_AUTH_TOKEN
+    - npm run build || sentry-cli send-event -m "Error de compilación"
 
 test:
   stage: test
   script:
     - npm install
     - npm run lint
-    - npm run test || sentry-cli send-event -m "Error en los tests" --auth-token $SENTRY_AUTH_TOKEN
+    - npm run test || sentry-cli send-event -m "Error en los tests"
 
 after_script:
   - VERSION=$(sentry-cli releases propose-version)
-  - sentry-cli releases new "$VERSION" --auth-token $SENTRY_AUTH_TOKEN
-  - sentry-cli releases set-commits "$VERSION" --auto --auth-token $SENTRY_AUTH_TOKEN
-  - sentry-cli releases finalize "$VERSION" --auth-token $SENTRY_AUTH_TOKEN
+  - sentry-cli releases new "$VERSION"
+  - sentry-cli releases set-commits "$VERSION" --auto
+  - sentry-cli releases finalize "$VERSION"
