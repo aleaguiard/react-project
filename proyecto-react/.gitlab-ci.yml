@@ -12,7 +12,6 @@ build:
   script:
     - npm install
     - npm run build
-    - export SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN
     - npx @sentry/cli releases -o ale-aguiar-diaz -p proyecto-react deploys $CI_COMMIT_SHORT_SHA new -e production
 
 test:
@@ -21,12 +20,4 @@ test:
     - npm install
     - npm run lint
     - npm run test
-    - export SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN
     - npx @sentry/cli releases -o ale-aguiar-diaz -p proyecto-react deploys $CI_COMMIT_SHORT_SHA new -e staging
-
-variables:
-  SENTRY_AUTH_TOKEN:
-    description: "Token de autenticación de Sentry"
-    type: "string"
-    mask: true
-    protected: true
