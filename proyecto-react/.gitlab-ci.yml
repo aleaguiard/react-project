@@ -12,17 +12,17 @@ build:
   stage: build
   script:
     - npm install
-    - npm run build || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de compilación"
+    - npm run build || sentry-cli send-event -m "Error de compilación" --auth-token $SENTRY_AUTH_TOKEN
 
 test:
   stage: test
   script:
     - npm install
     - npm run lint
-    - npm run test || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de prueba"
+    - npm run test || sentry-cli send-event -m "Error en los tests" --auth-token $SENTRY_AUTH_TOKEN
 
 after_script:
   - VERSION=$(sentry-cli releases propose-version)
-  - sentry-cli releases new "$VERSION" --project ale-aguiar-diaz/proyecto-react
-  - sentry-cli releases set-commits "$VERSION" --auto --project ale-aguiar-diaz/proyecto-react
-  - sentry-cli releases finalize "$VERSION" --project ale-aguiar-diaz/proyecto-react
+  - sentry-cli releases new "$VERSION" --auth-token $SENTRY_AUTH_TOKEN
+  - sentry-cli releases set-commits "$VERSION" --auto --auth-token $SENTRY_AUTH_TOKEN
+  - sentry-cli releases finalize "$VERSION" --auth-token $SENTRY_AUTH_TOKEN
