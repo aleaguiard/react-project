@@ -1,0 +1,17 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+    - npx @sentry/cli releases -o ale-aguiar-diaz -p proyecto-react deploys $CI_COMMIT_SHORT_SHA new -e production
+
+test:
+  stage: test
+  script:
+    - npm run lint
+    - npm run test
+    - npx @sentry/cli releases -o ale-aguiar-diaz -p proyecto-react deploys $CI_COMMIT_SHORT_SHA new -e staging
