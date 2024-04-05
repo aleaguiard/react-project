@@ -12,7 +12,7 @@ build:
   script:
     - npm install
     - npm run build
-    - npx @sentry/cli releases -o ale-aguiar-diaz -p proyecto-react deploys $CI_COMMIT_SHORT_SHA new -e production
+    - node build.js || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de compilación"
 
 test:
   stage: test
@@ -20,4 +20,4 @@ test:
     - npm install
     - npm run lint
     - npm run test
-    - npx @sentry/cli releases -o ale-aguiar-diaz -p proyecto-react deploys $CI_COMMIT_SHORT_SHA new -e staging
+    - npm test || sentry-cli send-event --auth-token $SENTRY_AUTH_TOKEN --dsn $SENTRY_DSN --message "Error de prueba"
