@@ -38,7 +38,7 @@ describe('App', () => {
     });
 
     // Test #3: Verifica si se renderiza correctamente DateComponent con la fecha y la hora actuales.
-    it('Renders DateComponent', () => {
+    it('Renders Date-Time', () => {
         // ARRANGE
         renderApp(['/date']);
 
@@ -55,5 +55,17 @@ describe('App', () => {
 
         expect(dateElement.textContent).toContain(currentDate);
         expect(timeElement.textContent).toContain(currentTime);
+    });
+
+    // Test #4: Verifica si el título "Quote" se renderiza correctamente.
+    it('Renders the title "Quote"', () => {
+        // ARRANGE
+        renderApp(['/quote']);
+
+        // ACT
+        const headingElement = screen.getByRole('heading', { level: 1 });
+
+        // EXPECT
+        expect(headingElement.textContent).toEqual('Quote');
     });
 });

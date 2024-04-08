@@ -11,7 +11,12 @@ function NotFound() {
             <br />
             <br />
             <Link to="/date">
-                <Button>Go Date-Time</Button>
+                <Button>Go Date</Button>
+            </Link>
+            <br />
+            <br />
+            <Link to="/quote">
+                <Button> Quote </Button>
             </Link>
         </div>
     );

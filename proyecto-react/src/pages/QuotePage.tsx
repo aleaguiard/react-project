@@ -19,6 +19,11 @@ const QuotePage: React.FC = () => {
             <Link to="/">
                 <Button>Go Home</Button>
             </Link>
+            <br />
+            <br />
+            <Link to="/date">
+                <Button> Date </Button>
+            </Link>
         </div>
     );
 };

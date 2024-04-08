@@ -28,6 +28,11 @@ const DateComponent = () => {
             <Link to="/">
                 <Button>Go Home</Button>
             </Link>
+            <br />
+            <br />
+            <Link to="/quote">
+                <Button> Quote </Button>
+            </Link>
         </div>
     );
 };
