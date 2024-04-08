@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../components/Button/Button';
 
 const DateComponent = () => {
     // Estado para almacenar la fecha y hora actuales
@@ -24,7 +25,9 @@ const DateComponent = () => {
         <div>
             <h1>Fecha: {date}</h1>
             <h1>Hora: {time}</h1>
-            <Link to="/">GO HOME</Link>
+            <Link to="/">
+                <Button>Go Home</Button>
+            </Link>
         </div>
     );
 };

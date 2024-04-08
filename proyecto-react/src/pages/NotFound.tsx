@@ -1,12 +1,18 @@
 import { Link } from 'react-router-dom';
+import Button from '../components/Button/Button';
 
 function NotFound() {
     return (
         <div>
             <h1>Not Found Page</h1>
-            <Link to="/">GO HOME</Link>
+            <Link to="/">
+                <Button>Go Home</Button>
+            </Link>
             <br />
-            <Link to="/date">GO DATE-TIME</Link>
+            <br />
+            <Link to="/date">
+                <Button>Go Date-Time</Button>
+            </Link>
         </div>
     );
 }
