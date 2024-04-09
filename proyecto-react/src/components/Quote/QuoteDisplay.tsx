@@ -9,7 +9,7 @@ interface Props {
 const QuoteDisplay: React.FC<Props> = ({ quote }) => {
     return (
         <>
-            <blockquote>{quote.quote}</blockquote>
+            <blockquote data-testid="quote-text">{quote.quote}</blockquote>
             <h3>{quote.author}</h3>
         </>
     );

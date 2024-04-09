@@ -2,7 +2,7 @@ import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
 import useWeatherData from '../hooks/useWeatherData';
 
-const WeatherApp = () => {
+const WeatherPage = () => {
     const { city, weatherData, handleCityChange, handleButtonClick } =
         useWeatherData();
 
@@ -22,7 +22,7 @@ const WeatherApp = () => {
             <br />
             {weatherData && (
                 <div>
-                    <h2>{weatherData.name}</h2>
+                    <h2 data-testid="city-title">{weatherData.name}</h2>
                     <p>Temperatura: {weatherData.main.temp.toFixed(0)}°C</p>
                     <p>Descripción: {weatherData.weather[0].description}</p>
                 </div>
@@ -33,4 +33,4 @@ const WeatherApp = () => {
     );
 };
 
-export default WeatherApp;
+export default WeatherPage;
