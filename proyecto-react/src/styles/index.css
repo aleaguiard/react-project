@@ -30,3 +30,20 @@ h1 {
 h1, a, div {
   text-align: center;
 }
+
+.input-container {
+  margin-bottom: 20px;
+}
+
+.input-field {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px; /* Ajusta el ancho según sea necesario */
+  font-size: 16px;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: #007bff; /* Cambia el color del borde al hacer foco */
+}

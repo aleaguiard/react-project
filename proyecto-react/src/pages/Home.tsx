@@ -1,20 +1,10 @@
-import { Link } from 'react-router-dom';
 import Button from '../components/Button/Button';
+import Navigation from '../components/Navigation/Navigation';
 
 function Home() {
     return (
         <div>
             <h1>Home</h1>
-            <Link to="/date">
-                <Button> Date </Button>
-            </Link>
-            <br />
-            <br />
-            <Link to="/quote">
-                <Button> Quote </Button>
-            </Link>
-            <br />
-            <br />
             <Button
                 onClick={() => {
                     throw new Error('PRUEBA ERROR SENTRY');
@@ -22,6 +12,9 @@ function Home() {
             >
                 Send Error to Sentry
             </Button>
+            <br />
+            <br />
+            <Navigation currentPage="/" />
         </div>
     );
 }

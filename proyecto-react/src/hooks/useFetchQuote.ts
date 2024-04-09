@@ -8,17 +8,15 @@ const useFetchQuote = (): [Quote | null, () => void] => {
     });
 
     const fetchQuote = useCallback(async () => {
-        const apiKey = 'RvR5F0cmfFAguKH1LSi4Xg==AfIhrRIdSKGGZqCI';
+        const apiKey = import.meta.env.VITE_QUOTE_API_KEY as string;
         const requestOptions = {
             headers: {
                 'X-Api-Key': apiKey,
             },
         };
 
-        const res = await fetch(
-            'https://api.api-ninjas.com/v1/quotes?category=humor',
-            requestOptions,
-        );
+        const apiUrl = import.meta.env.VITE_QUOTE_API_URL as string;
+        const res = await fetch(apiUrl, requestOptions);
         const data: Quote[] = await res.json();
 
         return data[0];

@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import DateComponent from './pages/DateComponent';
 import QuotePage from './pages/QuotePage';
+import WeatherApp from './pages/WeatherPage';
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/date" element={<DateComponent />} />
             <Route path="/quote" element={<QuotePage />} />
+            <Route path="/weather" element={<WeatherApp />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
         // </Router>

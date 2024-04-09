@@ -1,13 +1,22 @@
 .button {
-    background-color: #007bff; 
-    color: #ffffff; 
-    border: none; 
-    padding: 8px 16px; 
-    border-radius: 4px; 
-    cursor: pointer; 
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
+  background-color: #007bff; 
+  color: #ffffff; 
+  border: none; 
+  padding: 8px 16px; 
+  border-radius: 4px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button:active {
+  background-color: #007bff; 
+  transition: background-color 0s;
+}
+
+.button:focus {
+  outline: none;
+}

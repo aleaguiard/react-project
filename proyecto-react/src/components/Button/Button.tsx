@@ -1,13 +1,7 @@
 import React from 'react';
 import './Button.css';
 import { NavLink } from 'react-router-dom';
-
-interface ButtonProps {
-    onClick?: () => void;
-    to?: string;
-    href?: string;
-    children: React.ReactNode;
-}
+import ButtonProps from '../../types/IButtonProps';
 
 const Button: React.FC<ButtonProps> = ({ onClick, to, href, children }) => {
     if (to && !href) {
