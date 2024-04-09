@@ -4,6 +4,13 @@ stages:
   - build
   - test
 
+variables:
+#  VITE_SENTRY_DSN: "$VITE_SENTRY_DSN"
+  VITE_QUOTE_API_URL: "$VITE_QUOTE_API_URL"
+  VITE_WEATHER_API_URL: "$VITE_WEATHER_API_URL"
+  VITE_QUOTE_API_KEY: "$VITE_QUOTE_API_KEY"
+  VITE_WEATHER_API_KEY: "$VITE_WEATHER_API_KEY"
+
 before_script:
   - cd proyecto-react
   # - npm install -g @sentry/cli
