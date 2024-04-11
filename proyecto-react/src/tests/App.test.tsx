@@ -40,99 +40,12 @@ describe('App', () => {
         expect(timeElement).toBeInTheDocument();
 
         const currentDate = new Date().toLocaleDateString();
-        const currentTime = new Date().toLocaleTimeString();
+        const currentTime = new Date().toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
 
         expect(dateElement.textContent).toContain(currentDate);
         expect(timeElement.textContent).toContain(currentTime);
     });
-
-    // Test #5: Verifica si se obtiene correctamente los datos del clima de una ciudad desde la API de OpenWeatherMap.
-    // it('Should fetch weather data from OpenWeatherMap API', async () => {
-    //     renderApp(['/weather']);
-
-    //     vi.mock('axios', async () => {
-    //         const mockedWeatherData = {
-    //             name: 'Madrid',
-    //             main: {
-    //                 temp: 20,
-    //                 humidity: 70,
-    //             },
-    //             weather: [
-    //                 {
-    //                     main: 'Clouds',
-    //                     description: 'scattered clouds',
-    //                 },
-    //             ],
-    //         };
-    //         return {
-    //             default: {
-    //                 get: async () => ({ data: mockedWeatherData }),
-    //             },
-    //         };
-    //     });
-
-    //     await act(async () => {
-    //         const input = screen.getByPlaceholderText('Nombre de la ciudad');
-    //         fireEvent.change(input, { target: { value: MockAdapter.name } });
-
-    //         const button = screen.getByText('Clima');
-    //         fireEvent.click(button);
-    //     });
-
-    //     await waitFor(() => {
-    //         const cityName = screen.getByRole('heading', { level: 2 });
-    //         expect(cityName.textContent).toEqual('Madrid');
-    //     });
-    // });
-
-    // TESTS CON PETICIONES REALES A LAS APIs
-    // // Test #4: Verifica si se renderiza correctamente la quote después de hacer la petición a la API.
-    // it('Renders "Quote" from API', async () => {
-    //     renderApp(['/quote']);
-    //     const apiKey = import.meta.env.VITE_QUOTE_API_KEY as string;
-    //     const requestOptions = {
-    //         headers: {
-    //             'X-Api-Key': apiKey,
-    //         },
-    //     };
-
-    //     await act(async () => {
-    //         const apiUrl = import.meta.env.VITE_QUOTE_API_URL as string;
-    //         await axios.get(apiUrl, requestOptions);
-    //         await new Promise((resolve) => setTimeout(resolve, 100));
-    //     });
-
-    //     await act(async () => {
-    //         const blockquoteElement = screen.getByTestId('quote-text');
-    //         expect(blockquoteElement).toBeInTheDocument();
-    //     });
-    // });
-
-    // // Test #5: Verifica si se obtiene correctamente los datos del clima de una ciudad desde la API de OpenWeatherMap.
-    // it('Should fetch weather data from OpenWeatherMap API', async () => {
-    //     renderApp(['/weather']);
-
-    //     const city = 'Madrid';
-    //     const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
-    //     const apiUrl = `${import.meta.env.VITE_WEATHER_API_URL}?q=${city}&appid=${API_KEY}&units=metric&lang=es`;
-
-    //     const input = screen.getByPlaceholderText('Nombre de la ciudad');
-    //     fireEvent.change(input, { target: { value: city } });
-
-    //     const button = screen.getByText('Clima');
-    //     fireEvent.click(button);
-
-    //     await act(async () => {
-    //         const response = await axios.get(apiUrl);
-    //         const data = response.data;
-    //         expect(response.status).toBe(200);
-    //         expect(data.name).toBe(city);
-    //         await new Promise((resolve) => setTimeout(resolve, 100));
-    //     });
-
-    //     await act(async () => {
-    //         const h2Element = screen.getByTestId('city-title');
-    //         expect(h2Element).toBeInTheDocument();
-    //     });
-    // });
 });

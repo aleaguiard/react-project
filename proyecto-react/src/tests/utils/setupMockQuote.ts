@@ -1,8 +1,7 @@
 import { vi } from 'vitest';
-import Quote from '../../types/IQuote';
 import axios from 'axios';
 
-export const mockedQuoteData = (): Quote[] => [
+export const mockedQuoteData = () => [
     {
         quote: 'Humor can be an incredible lacerating and effective weapon. And that is the way I use it.',
         author: 'Carl Hiaasen',
@@ -17,6 +16,6 @@ export const mockedQuoteData = (): Quote[] => [
 
 export const setupMockQuote = () => {
     vi.mocked(axios, true).get.mockResolvedValueOnce({
-        mockedQuoteData,
+        data: mockedQuoteData(),
     });
 };

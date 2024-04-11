@@ -21,11 +21,9 @@ describe('WeatherAPI', () => {
             </MemoryRouter>,
         );
     };
-    // Test #4: Verifica si se obtiene correctamente los datos del clima de una ciudad desde la API de OpenWeatherMap..
-    test('Should fetch weather data from mockup', async () => {
+    // Test #5: Verifica si se obtiene correctamente los datos del clima de una ciudad desde la API de OpenWeatherMap.
+    test('Should render weather data from mockup', async () => {
         renderApp();
-
-        // Simulación de respuesta exitosa de la API
         setupMockWeather();
 
         await act(async () => {
@@ -38,7 +36,6 @@ describe('WeatherAPI', () => {
             fireEvent.click(button);
         });
 
-        // Verifica que se muestre correctamente la temperatura recibida
         await waitFor(() => {
             const temperatureElement = screen.getByText(/Temperatura:/i);
             expect(temperatureElement.textContent).toContain(
@@ -47,3 +44,30 @@ describe('WeatherAPI', () => {
         });
     });
 });
+// TESTS CON PETICIONES REALES A LA API
+// it('Should fetch weather data from OpenWeatherMap API', async () => {
+//     renderApp(['/weather']);
+
+//     const city = 'Madrid';
+//     const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+//     const apiUrl = `${import.meta.env.VITE_WEATHER_API_URL}?q=${city}&appid=${API_KEY}&units=metric&lang=es`;
+
+//     const input = screen.getByPlaceholderText('Nombre de la ciudad');
+//     fireEvent.change(input, { target: { value: city } });
+
+//     const button = screen.getByText('Clima');
+//     fireEvent.click(button);
+
+//     await act(async () => {
+//         const response = await axios.get(apiUrl);
+//         const data = response.data;
+//         expect(response.status).toBe(200);
+//         expect(data.name).toBe(city);
+//         await new Promise((resolve) => setTimeout(resolve, 100));
+//     });
+
+//     await act(async () => {
+//         const h2Element = screen.getByTestId('city-title');
+//         expect(h2Element).toBeInTheDocument();
+//     });
+// });

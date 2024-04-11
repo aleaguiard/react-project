@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { vi } from 'vitest';
 
 export const mockedWeatherData = () => ({
@@ -13,9 +14,7 @@ export const mockedWeatherData = () => ({
 });
 
 export const setupMockWeather = () => {
-    vi.mock('axios', async () => ({
-        default: {
-            get: async () => ({ data: mockedWeatherData() }),
-        },
-    }));
+    vi.mocked(axios, true).get.mockResolvedValueOnce({
+        data: mockedWeatherData(),
+    });
 };
