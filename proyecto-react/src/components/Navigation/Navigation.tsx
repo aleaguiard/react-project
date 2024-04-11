@@ -4,31 +4,27 @@ import Button from '../Button/Button';
 import NavigationProps from '../../types/INavigation';
 
 const Navigation: React.FC<NavigationProps> = ({ currentPage }) => {
+    const pages = [
+        { path: '/', label: 'Home' },
+        { path: '/weather', label: 'Weather' },
+        { path: '/date', label: 'Date' },
+        { path: '/quote', label: 'Quote' },
+    ];
+
     return (
         <div className="navigation-container">
-            {currentPage !== '/' && (
-                <Link to="/" className={`nav-link`}>
-                    <Button>Home</Button>
-                </Link>
+            {pages.map(
+                ({ path, label }) =>
+                    currentPage !== path && (
+                        <Link
+                            key={path}
+                            to={path}
+                            className={`nav-link ${currentPage === path ? 'active' : ''}`}
+                        >
+                            <Button>{label}</Button>
+                        </Link>
+                    ),
             )}
-            <Link
-                to="/weather"
-                className={`nav-link ${currentPage === 'weather' ? 'active' : ''}`}
-            >
-                <Button>Weather</Button>
-            </Link>
-            <Link
-                to="/date"
-                className={`nav-link ${currentPage === 'date' ? 'active' : ''}`}
-            >
-                <Button>Date</Button>
-            </Link>
-            <Link
-                to="/quote"
-                className={`nav-link ${currentPage === 'quote' ? 'active' : ''}`}
-            >
-                <Button>Quote</Button>
-            </Link>
         </div>
     );
 };
