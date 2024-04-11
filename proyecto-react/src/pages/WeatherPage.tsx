@@ -22,7 +22,7 @@ const WeatherPage = () => {
             <br />
             {weatherData && (
                 <div>
-                    <h2 data-testid="city-title">{weatherData.name}</h2>
+                    <h2>{weatherData.name}</h2>
                     <p>Temperatura: {weatherData.main.temp.toFixed(0)}°C</p>
                     <p>Descripción: {weatherData.weather[0].description}</p>
                 </div>
