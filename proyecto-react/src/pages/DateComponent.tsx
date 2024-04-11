@@ -13,9 +13,12 @@ const DateComponent = () => {
     }, []);
 
     const date = dateTime.toLocaleDateString();
-    const time = dateTime.toLocaleTimeString();
+    const time = dateTime.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    });
 
-    // Renderiza la fecha y la hora
     return (
         <div>
             <h1>Fecha: {date}</h1>
