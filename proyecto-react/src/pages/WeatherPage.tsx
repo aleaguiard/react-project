@@ -1,6 +1,7 @@
 import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
 import useWeatherData from '../hooks/useWeatherData';
+import { ToastContainer } from 'react-toastify';
 
 const WeatherPage = () => {
     const { city, weatherData, handleCityChange, handleButtonClick } =
@@ -17,18 +18,19 @@ const WeatherPage = () => {
                     value={city}
                     onChange={(e) => handleCityChange(e.target.value)}
                 />
+                <ToastContainer /> {/* Este es el contenedor de los toasts */}
             </div>
             <Button onClick={handleButtonClick}> Clima </Button>
             <br />
-            {weatherData && (
+            {weatherData ? (
                 <div>
                     <h2>{weatherData.name}</h2>
                     <p>Temperatura: {weatherData.main.temp.toFixed(0)}°C</p>
                     <p>Descripción: {weatherData.weather[0].description}</p>
                 </div>
-            )}
+            ) : null}
             <br />
-            <Navigation currentPage="weather" />
+            <Navigation currentPage="/weather" />
         </div>
     );
 };

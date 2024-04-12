@@ -23,7 +23,7 @@ const DateComponent = () => {
         <div>
             <h1>Fecha: {date}</h1>
             <h1>Hora: {time}</h1>
-            <Navigation currentPage="date" />
+            <Navigation currentPage="/date" />
         </div>
     );
 };

@@ -33,7 +33,7 @@ const QuotePage: React.FC = () => {
                 </div>
                 <br />
                 <br />
-                <Navigation currentPage="quote" />
+                <Navigation currentPage="/quote" />
             </div>
         </div>
     );

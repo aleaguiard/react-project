@@ -4,7 +4,7 @@ function NotFound() {
     return (
         <div>
             <h1>Not Found Page</h1>
-            <Navigation currentPage="notfound" />
+            <Navigation currentPage="/notfound" />
         </div>
     );
 }

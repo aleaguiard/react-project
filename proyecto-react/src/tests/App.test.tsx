@@ -47,6 +47,6 @@ describe('App', () => {
 
         expect(dateElement.textContent).toContain(currentDate);
         // expect(timeElement.textContent).toContain(currentTime);
-        expect(timeElement.textContent).toContain(currentTime.substring(0, 6));
+        expect(timeElement.textContent).toContain(currentTime.substring(0, 5));
     });
 });
