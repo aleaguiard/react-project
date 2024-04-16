@@ -1,11 +1,18 @@
+import React from 'react';
+import useWeatherData from '../hooks/useWeatherData';
 import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
-import useWeatherData from '../hooks/useWeatherData';
-import { ToastContainer } from 'react-toastify';
+import { WeatherApiService } from '../api/WeatherApi';
+import { AxiosHttpClient } from '../api/AxiosHttpClient';
 
-const WeatherPage = () => {
+const WeatherPage: React.FC = () => {
+    const urlApi = import.meta.env.VITE_WEATHER_API_URL;
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    const httpClient = new AxiosHttpClient(urlApi, apiKey);
+    const weatherService = new WeatherApiService(httpClient);
+
     const { city, weatherData, handleCityChange, handleButtonClick } =
-        useWeatherData();
+        useWeatherData(weatherService);
 
     return (
         <div>
@@ -18,9 +25,8 @@ const WeatherPage = () => {
                     value={city}
                     onChange={(e) => handleCityChange(e.target.value)}
                 />
-                <ToastContainer /> {/* Este es el contenedor de los toasts */}
             </div>
-            <Button onClick={handleButtonClick}> Clima </Button>
+            <Button onClick={handleButtonClick}>Clima</Button>
             <br />
             {weatherData ? (
                 <div>

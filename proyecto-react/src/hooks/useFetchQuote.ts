@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { ApiKeys } from '../types/IApiKeys';
 import { FetchError } from '../types/IFetchError';
-import { HttpClient } from '../types/IHttpClient';
 import Quote from '../types/IQuote';
+import { QuoteApi } from '../api/QuoteApi'; // Assuming QuoteApi provides fetch functionality
 
-const useFetchQuote = (httpClient: HttpClient, apiKeys: ApiKeys) => {
+const useFetchQuote = (quoteApi: QuoteApi) => {
     const [quote, setQuote] = useState<Quote | null>(null);
     const [error, setError] = useState<FetchError | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -12,15 +11,12 @@ const useFetchQuote = (httpClient: HttpClient, apiKeys: ApiKeys) => {
     const fetchNewQuote = async (category: string) => {
         setIsLoading(true);
         try {
-            const { data } = await httpClient.get(
-                `${import.meta.env.VITE_QUOTE_API_URL}${category}`,
-                {
-                    headers: {
-                        'X-Api-Key': apiKeys.quoteApiKey,
-                    },
-                },
-            );
-            setQuote(data[0]);
+            const newQuote = await quoteApi.fetchQuote(category);
+            if (newQuote) {
+                setQuote(newQuote[0]);
+            } else {
+                setError({ message: 'Response data is empty' });
+            }
         } catch (err) {
             const errorObj: FetchError = {
                 message: err instanceof Error ? err.message : String(err),
