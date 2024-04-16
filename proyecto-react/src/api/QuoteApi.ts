@@ -1,24 +1,16 @@
-import axios, { AxiosInstance } from 'axios';
 import Quote from '../types/IQuote';
+import { HttpClient } from './IHttpClient';
+import { QuoteService } from './IQuoteService';
 
-export class QuoteApi {
-    private axiosInstance: AxiosInstance;
-
-    constructor(
-        private apiUrl: string,
-        private apiKey?: string,
-    ) {
-        this.axiosInstance = axios.create();
-
-        if (this.apiKey) {
-            this.axiosInstance.defaults.headers.common['X-Api-Key'] =
-                this.apiKey;
-        }
-    }
+export class QuoteApi implements QuoteService {
+    constructor(private httpClient: HttpClient<Quote[]>) {}
 
     async fetchQuote(category: string): Promise<Quote[]> {
-        const url = `${this.apiUrl}${category}`;
-        const response = await this.axiosInstance.get(url);
-        return response.data;
+        try {
+            const response = await this.httpClient.get(category);
+            return response.data;
+        } catch (error: unknown) {
+            throw new Error(`Error fetching data: ${(error as Error).message}`);
+        }
     }
 }

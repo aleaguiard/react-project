@@ -1,4 +1,7 @@
-export interface HttpClient {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    get(url: string): Promise<any>;
+export interface HttpClient<T> {
+    get(url: string): Promise<ApiResponse<T>>;
+}
+
+export interface ApiResponse<T> {
+    data: T;
 }

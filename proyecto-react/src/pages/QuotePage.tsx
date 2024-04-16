@@ -2,14 +2,17 @@ import React from 'react';
 import useFetchQuote from '../hooks/useFetchQuote';
 import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
-import { QuoteApi } from '../api/QuoteApi'; // Assuming QuoteApi is refactored from AxiosHttpClient
+import { QuoteApi } from '../api/QuoteApi';
+import { FetchHttpClient } from '../api/FetchHttpClient';
 
 const QuotePage: React.FC = () => {
     const urlApi = import.meta.env.VITE_QUOTE_API_URL;
     const apiKey = import.meta.env.VITE_QUOTE_API_KEY;
-    const quoteApi = new QuoteApi(urlApi, apiKey); // Use the QuoteApi instance
+    const httpClient = new FetchHttpClient(urlApi, apiKey);
+    const quoteService = new QuoteApi(httpClient);
 
-    const { quote, isLoading, error, fetchNewQuote } = useFetchQuote(quoteApi);
+    const { quote, isLoading, error, fetchNewQuote } =
+        useFetchQuote(quoteService);
 
     const handleClick = (category: string) => {
         fetchNewQuote(category);

@@ -3,7 +3,7 @@ import WeatherData from '../types/IWeatherData';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios, { AxiosError } from 'axios';
-import { WeatherService } from '../types/IWeatherService';
+import { WeatherService } from '../api/IWeatherService';
 
 const useWeatherData = (weatherService: WeatherService) => {
     const [city, setCity] = useState('');
@@ -18,13 +18,13 @@ const useWeatherData = (weatherService: WeatherService) => {
                 axios.isAxiosError(error) &&
                 (error as AxiosError).response?.status === 404
             ) {
-                console.error('Ciudad no encontrada:', error);
                 toast.error('Ciudad no encontrada', { position: 'top-center' });
+                console.error('Ciudad no encontrada:', error);
             } else {
-                console.error('Error al obtener los datos del clima:', error);
                 toast.error('Error al obtener los datos del clima', {
                     position: 'top-center',
                 });
+                console.error('Error al obtener los datos del clima:', error);
             }
         }
     };

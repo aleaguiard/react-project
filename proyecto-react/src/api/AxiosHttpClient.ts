@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
-import { HttpClient } from './IHttpClient';
+import { ApiResponse, HttpClient } from './IHttpClient';
 import WeatherData from '../types/IWeatherData';
 
-export class AxiosHttpClient implements HttpClient {
+export class AxiosHttpClient implements HttpClient<WeatherData> {
     private axiosInstance: AxiosInstance;
 
     constructor(
@@ -19,8 +19,12 @@ export class AxiosHttpClient implements HttpClient {
         });
     }
 
-    async get(url: string): Promise<WeatherData> {
-        const response = await this.axiosInstance.get(url);
-        return response.data;
+    async get(url: string): Promise<ApiResponse<WeatherData>> {
+        try {
+            const response = await this.axiosInstance.get(url);
+            return { data: response.data };
+        } catch (error: unknown) {
+            throw new Error(`Error fetching data: ${(error as Error).message}`);
+        }
     }
 }
