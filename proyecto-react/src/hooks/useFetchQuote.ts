@@ -1,12 +1,10 @@
 import { useState } from 'react';
+import { ApiKeys } from '../types/IApiKeys';
+import { FetchError } from '../types/IFetchError';
+import { HttpClient } from '../types/IHttpClient';
 import Quote from '../types/IQuote';
-import axios from 'axios';
 
-interface FetchError {
-    message: string;
-}
-
-const useFetchQuote = () => {
+const useFetchQuote = (httpClient: HttpClient, apiKeys: ApiKeys) => {
     const [quote, setQuote] = useState<Quote | null>(null);
     const [error, setError] = useState<FetchError | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -14,12 +12,11 @@ const useFetchQuote = () => {
     const fetchNewQuote = async (category: string) => {
         setIsLoading(true);
         try {
-            const { data } = await axios.get(
+            const { data } = await httpClient.get(
                 `${import.meta.env.VITE_QUOTE_API_URL}${category}`,
                 {
                     headers: {
-                        'X-Api-Key': import.meta.env
-                            .VITE_QUOTE_API_KEY as string,
+                        'X-Api-Key': apiKeys.quoteApiKey,
                     },
                 },
             );
