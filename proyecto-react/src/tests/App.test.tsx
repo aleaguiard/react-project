@@ -1,10 +1,8 @@
-import { describe, it, vi } from 'vitest';
+import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import App from '../App';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-
-vi.mock('axios');
 
 describe('App', () => {
     const renderApp = (initialEntries = ['/']) => {

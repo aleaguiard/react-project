@@ -31,25 +31,3 @@ describe('QuoteAPI', () => {
         expect(quoteElement).toBeInTheDocument();
     });
 });
-
-// TESTS CON PETICIONES REALES A LA API
-// it('Renders "Quote" from API', async () => {
-//     renderApp(['/quote']);
-//     const apiKey = import.meta.env.VITE_QUOTE_API_KEY as string;
-//     const requestOptions = {
-//         headers: {
-//             'X-Api-Key': apiKey,
-//         },
-//     };
-
-//     await act(async () => {
-//         const apiUrl = import.meta.env.VITE_QUOTE_API_URL as string;
-//         await axios.get(apiUrl, requestOptions);
-//         await new Promise((resolve) => setTimeout(resolve, 100));
-//     });
-
-//     await act(async () => {
-//         const blockquoteElement = screen.getByTestId('quote-text');
-//         expect(blockquoteElement).toBeInTheDocument();
-//     });
-// });

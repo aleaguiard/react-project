@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { vi } from 'vitest';
+import { AxiosHttpClient } from '../../api/AxiosHttpClient';
 
 export const mockedWeatherData = () => ({
     name: 'Madrid',
@@ -14,7 +14,9 @@ export const mockedWeatherData = () => ({
 });
 
 export const setupMockWeather = () => {
-    vi.mocked(axios, true).get.mockResolvedValueOnce({
-        data: mockedWeatherData(),
-    });
+    const mockGet = vi
+        .fn()
+        .mockResolvedValueOnce({ data: mockedWeatherData() });
+
+    AxiosHttpClient.prototype.get = mockGet;
 };

@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import axios from 'axios';
+import { FetchHttpClient } from '../../api/FetchHttpClient';
 
 export const mockedQuoteData = () => [
     {
@@ -15,7 +15,7 @@ export const mockedQuoteData = () => [
 ];
 
 export const setupMockQuote = () => {
-    vi.mocked(axios, true).get.mockResolvedValueOnce({
-        data: mockedQuoteData(),
-    });
+    const mockGet = vi.fn().mockResolvedValueOnce({ data: mockedQuoteData() });
+
+    FetchHttpClient.prototype.get = mockGet;
 };
