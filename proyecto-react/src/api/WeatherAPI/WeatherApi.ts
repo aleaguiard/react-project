@@ -1,6 +1,6 @@
-import WeatherData from '../types/IWeatherData';
+import WeatherData from '../../types/IWeatherData';
 import { WeatherService } from './IWeatherService';
-import { HttpClient } from './IHttpClient';
+import { HttpClient } from '../IHttpClient';
 
 export class WeatherApi implements WeatherService {
     constructor(private httpClient: HttpClient<WeatherData>) {}

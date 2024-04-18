@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
-import { ApiResponse, HttpClient } from './IHttpClient';
-import WeatherData from '../types/IWeatherData';
+import { ApiResponse, HttpClient } from '../IHttpClient';
+import { UnsplashPhotoResponse } from '../../types/IUnsplashphoto';
 
-export class AxiosHttpClient implements HttpClient<WeatherData> {
+export class ImageHttpClient implements HttpClient<UnsplashPhotoResponse> {
     private axiosInstance: AxiosInstance;
 
     constructor(
@@ -12,19 +12,19 @@ export class AxiosHttpClient implements HttpClient<WeatherData> {
         this.axiosInstance = axios.create({
             baseURL: this.apiUrl,
             params: {
-                appid: this.apiKey,
-                units: 'metric',
-                lang: 'es',
+                client_id: this.apiKey,
             },
         });
     }
 
-    async get(url: string): Promise<ApiResponse<WeatherData>> {
+    async get(url: string): Promise<ApiResponse<UnsplashPhotoResponse>> {
         try {
             const response = await this.axiosInstance.get(url);
             return { data: response.data };
         } catch (error: unknown) {
-            throw new Error(`Error fetching data: ${(error as Error).message}`);
+            throw new Error(
+                `Error fetching image data: ${(error as Error).message}`,
+            );
         }
     }
 }

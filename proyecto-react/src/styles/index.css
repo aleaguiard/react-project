@@ -60,3 +60,11 @@ blockquote {
   font-style: italic;
   color: #333;
 }
+
+.weather-info {
+  border: 2px solid #ccc;
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 300px; 
+  text-align: center;
+}

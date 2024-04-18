@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import { FetchHttpClient } from '../../api/FetchHttpClient';
+import { FetchHttpClient } from '../../api/QuoteAPI/FetchHttpClient';
 
 export const mockedQuoteData = () => [
     {

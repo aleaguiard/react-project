@@ -2,7 +2,7 @@ import { useState } from 'react';
 import WeatherData from '../types/IWeatherData';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { WeatherService } from '../api/IWeatherService';
+import { WeatherService } from '../api/WeatherAPI/IWeatherService';
 
 const useWeatherData = (weatherService: WeatherService) => {
     const [city, setCity] = useState('');

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FetchError } from '../types/IFetchError';
 import Quote from '../types/IQuote';
-import { QuoteApi } from '../api/QuoteApi';
+import { QuoteApi } from '../api/QuoteAPI/QuoteApi';
 
 const useFetchQuote = (quoteApi: QuoteApi) => {
     const [quote, setQuote] = useState<Quote | null>(null);

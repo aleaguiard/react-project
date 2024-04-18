@@ -2,18 +2,28 @@ import React from 'react';
 import useWeatherData from '../hooks/useWeatherData';
 import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
-import { AxiosHttpClient } from '../api/AxiosHttpClient';
 import { ToastContainer } from 'react-toastify';
-import { WeatherApi } from '../api/WeatherApi';
+import { AxiosHttpClient } from '../api/WeatherAPI/AxiosHttpClient';
+import { WeatherApi } from '../api/WeatherAPI/WeatherApi';
+import WeatherInfo from '../components/WeatherInfo/WeatherInfo';
+import useCityImage from '../hooks/useImageData';
 
 const WeatherPage: React.FC = () => {
-    const urlApi = import.meta.env.VITE_WEATHER_API_URL;
-    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-    const httpClient = new AxiosHttpClient(urlApi, apiKey);
+    const urlApiWeather = import.meta.env.VITE_WEATHER_API_URL;
+    const apiKeyWeather = import.meta.env.VITE_WEATHER_API_KEY;
+    const urlApiImage = import.meta.env.VITE_IMAGE_API_URL;
+    const apiKeyImage = import.meta.env.VITE_IMAGE_API_KEY;
+
+    const httpClient = new AxiosHttpClient(urlApiWeather, apiKeyWeather);
     const weatherService = new WeatherApi(httpClient);
 
     const { city, weatherData, handleCityChange, handleButtonClick } =
         useWeatherData(weatherService);
+    const { cityImage, description, isLoading } = useCityImage(
+        city,
+        urlApiImage,
+        apiKeyImage,
+    );
 
     return (
         <div>
@@ -30,12 +40,18 @@ const WeatherPage: React.FC = () => {
             </div>
             <Button onClick={handleButtonClick}>Clima</Button>
             <br />
-            {weatherData ? (
-                <div>
-                    <h2>{weatherData.name}</h2>
-                    <p>Temperatura: {weatherData.main.temp.toFixed(0)}°C</p>
-                    <p>Descripción: {weatherData.weather[0].description}</p>
-                </div>
+            <br />
+            {isLoading ? (
+                <p>Cargando imagen...</p>
+            ) : cityImage ? (
+                <>
+                    <img src={cityImage} alt={description || 'City'} />
+                    {weatherData ? (
+                        <WeatherInfo weatherData={weatherData} />
+                    ) : (
+                        <p>Cargando información del clima...</p>
+                    )}
+                </>
             ) : null}
             <br />
             <Navigation currentPage="/weather" />

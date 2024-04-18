@@ -1,5 +1,5 @@
 import { vi } from 'vitest';
-import { AxiosHttpClient } from '../../api/AxiosHttpClient';
+import { AxiosHttpClient } from '../../api/WeatherAPI/AxiosHttpClient';
 
 export const mockedWeatherData = () => ({
     name: 'Madrid',
