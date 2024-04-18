@@ -8,6 +8,7 @@ const useCityImage = (
     apiKeyImage: string,
 ) => {
     const [cityImage, setCityImage] = useState<string | null>(null);
+    const [description, setDescription] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -20,16 +21,14 @@ const useCityImage = (
                 );
                 const imageService = new ImageApi(imageHttpClient);
                 try {
-                    const { results } = await imageService.fetchImage(city); // Desestructurar results
-                    console.log('City Image Response:', results);
+                    const { results } = await imageService.fetchImage(city);
+                    console.log('City Image Results:', results);
                     if (results.length > 0) {
                         const { description, urls } = results[0];
+                        console.log('City Image Description:', description);
                         console.log('City Image URL:', urls.regular);
-                        console.log('City Image Description:', description); // Agregar console.log para descripción
-                        // Agregar console.log para URL regular
-                        // Desestructurar description y urls
                         setCityImage(urls.regular);
-                        // Hacer algo con la descripción si es necesario
+                        setDescription(description);
                     }
                 } catch (error) {
                     console.error('Error fetching city image:', error);
@@ -42,7 +41,7 @@ const useCityImage = (
         fetchCityImage();
     }, [city, urlApiImage, apiKeyImage]);
 
-    return { cityImage, isLoading };
+    return { cityImage, description, isLoading };
 };
 
 export default useCityImage;

@@ -67,4 +67,25 @@ blockquote {
   margin-bottom: 10px;
   width: 300px; 
   text-align: center;
+  background-color: beige;
+}
+
+.image-container {
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.imageCity {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.weather-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
