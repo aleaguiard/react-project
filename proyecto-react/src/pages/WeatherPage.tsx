@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
-import { ToastContainer } from 'react-toastify';
 import { AxiosHttpClient } from '../api/WeatherAPI/AxiosHttpClient';
 import { WeatherApi } from '../api/WeatherAPI/WeatherApi';
-import WeatherInfo from '../components/WeatherInfo/WeatherInfo';
 import { ImageHttpClient } from '../api/ImageAPI/ImageHttpClient';
 import { ImageApi } from '../api/ImageAPI/ImageApi';
 import WeatherData from '../types/IWeatherData';
+import WeatherDisplay from '../components/WeatherInfo/WeatherDisplay';
+import WeatherSearch from '../components/WeatherInfo/WeatherSearch';
+import toast, { Toaster } from 'react-hot-toast';
 
 const WeatherPage: React.FC = () => {
     const urlApiWeather = import.meta.env.VITE_WEATHER_API_URL;
@@ -21,17 +21,12 @@ const WeatherPage: React.FC = () => {
     const httpClientImage = new ImageHttpClient(urlApiImage, apiKeyImage);
     const imageService = new ImageApi(httpClientImage);
 
-    const [city, setCity] = useState('');
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [cityImage, setCityImage] = useState<string | null>(null);
     const [description, setDescription] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCity(event.target.value);
-    };
-
-    const handleButtonClick = async () => {
+    const handleButtonClick = async (city: string) => {
         if (city.trim() !== '') {
             try {
                 setIsLoading(true);
@@ -40,7 +35,9 @@ const WeatherPage: React.FC = () => {
 
                 const { results } = await imageService.fetchImage(city);
                 if (results.length > 0) {
-                    const { description, urls } = results[0];
+                    const randomIndex = Math.floor(Math.random() * 11);
+
+                    const { description, urls } = results[randomIndex];
                     setCityImage(urls.regular);
                     setDescription(description);
                 }
@@ -50,47 +47,28 @@ const WeatherPage: React.FC = () => {
                 setIsLoading(false);
             }
         } else {
-            console.error('Ingrese un nombre de ciudad válido');
+            console.error('HOLAA');
+            toast.error('This is an error!');
         }
     };
 
     return (
         <div>
+            <Toaster />
             <h1>Tiempo actual</h1>
-            <div className="input-container">
-                <input
-                    className="input-field"
-                    type="text"
-                    placeholder="Nombre de la ciudad"
-                    value={city}
-                    onChange={handleCityChange}
-                />
-                <ToastContainer />
-            </div>
-            <Button onClick={handleButtonClick}>Clima</Button>
-            <br />
-            <br />
-            {weatherData ? (
-                <div className="weather-image-container">
-                    <WeatherInfo weatherData={weatherData} />
-                    {isLoading ? (
-                        <p>Cargando imagen...</p>
-                    ) : (
-                        cityImage && (
-                            <div className="image-container">
-                                <img
-                                    className="imageCity"
-                                    src={cityImage}
-                                    alt={description || 'Imagen de la ciudad'}
-                                />
-                            </div>
-                        )
-                    )}
-                </div>
-            ) : null}
-            <br />
+            <WeatherSearch
+                onButtonClick={handleButtonClick}
+                setIsLoading={setIsLoading}
+            />
+            <WeatherDisplay
+                weatherData={weatherData}
+                cityImage={cityImage}
+                description={description}
+                isLoading={isLoading}
+            />
             <Navigation currentPage="/weather" />
         </div>
     );
 };
+
 export default WeatherPage;

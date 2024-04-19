@@ -29,7 +29,7 @@ const QuotePage: React.FC = () => {
                     <p> {quote.author}</p>
                 </div>
             )}
-            <div>
+            <div className="category-container">
                 <Button onClick={() => handleClick('humor')}>Humor</Button>{' '}
                 <Button onClick={() => handleClick('movies')}>Movies</Button>{' '}
                 <Button onClick={() => handleClick('inspirational')}>

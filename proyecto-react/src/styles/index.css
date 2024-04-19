@@ -54,6 +54,7 @@ h1, a, div {
   margin-bottom: 20px;
   width: 400px; 
   text-align: center;
+  border-radius: 10px;
 }
 
 blockquote {
@@ -65,14 +66,15 @@ blockquote {
   border: 2px solid #ccc;
   padding: 5px;
   margin-bottom: 10px;
-  width: 300px; 
+  width: 200px; 
   text-align: center;
-  background-color: beige;
+  background-color: rgb(197, 220, 234);
+  border-radius: 10px;
 }
 
 .image-container {
-  width: 600px;
-  height: 400px;
+  width: 400px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -89,3 +91,13 @@ blockquote {
   align-items: center;
   text-align: center;
 }
+
+.date-container {
+  border: 2px solid #ccc;
+  padding: 5px;
+  width: 500px; 
+  text-align: center;
+  background-color: rgb(197, 220, 234);
+  border-radius: 10px;
+}
+

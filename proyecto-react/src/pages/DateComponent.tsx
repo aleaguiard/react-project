@@ -21,8 +21,11 @@ const DateComponent = () => {
 
     return (
         <div>
-            <h1>Fecha: {date}</h1>
-            <h1>Hora: {time}</h1>
+            <div className="date-container">
+                <h1>Fecha: {date}</h1>
+                <h1>Hora: {time}</h1>
+            </div>
+            <br />
             <Navigation currentPage="/date" />
         </div>
     );
