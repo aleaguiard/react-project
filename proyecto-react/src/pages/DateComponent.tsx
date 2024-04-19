@@ -7,7 +7,7 @@ const DateComponent = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             setDateTime(new Date());
-        }, 1000);
+        }, 200);
 
         return () => clearInterval(intervalId);
     }, []);

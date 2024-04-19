@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FetchError } from '../types/IFetchError';
 import Quote from '../types/IQuote';
-import { QuoteApi } from '../api/QuoteAPI/QuoteApi';
+import { QuoteService } from '../api/QuoteAPI/IQuoteService';
 
-const useFetchQuote = (quoteApi: QuoteApi) => {
+const useFetchQuote = (quoteService: QuoteService) => {
     const [quote, setQuote] = useState<Quote | null>(null);
     const [error, setError] = useState<FetchError | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -11,7 +11,7 @@ const useFetchQuote = (quoteApi: QuoteApi) => {
     const fetchNewQuote = async (category: string) => {
         setIsLoading(true);
         try {
-            const newQuote = await quoteApi.fetchQuote(category);
+            const newQuote = await quoteService.fetchQuote(category);
             if (newQuote) {
                 setQuote(newQuote[0]);
             } else {

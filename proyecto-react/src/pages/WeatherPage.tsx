@@ -42,13 +42,12 @@ const WeatherPage: React.FC = () => {
                     setDescription(description);
                 }
             } catch (error) {
-                console.error('Error:', error);
+                toast.error('Ciudad no encontrada');
             } finally {
                 setIsLoading(false);
             }
         } else {
-            console.error('HOLAA');
-            toast.error('This is an error!');
+            toast.error('Introduce el nombre de una ciudad');
         }
     };
 
