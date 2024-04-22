@@ -2,13 +2,7 @@ import React from 'react';
 import useFetchQuote from '../hooks/useFetchQuote';
 import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
-// import { QuoteService } from '../api/QuoteAPI/IQuoteService';
-import { Service } from '../api/Interfaces/IService';
-import Quote from '../types/IQuote';
-
-interface QuotePageProps {
-    quoteService: Service<Quote[]>;
-}
+import { QuotePageProps } from '../types/IQuotePageProps';
 
 const QuotePage: React.FC<QuotePageProps> = ({ quoteService }) => {
     const { quote, isLoading, error, fetchNewQuote } =

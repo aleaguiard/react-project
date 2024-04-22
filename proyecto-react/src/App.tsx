@@ -5,11 +5,11 @@ import DateComponent from './pages/DateComponent';
 import QuotePage from './pages/QuotePage';
 import WeatherPage from './pages/WeatherPage';
 import { quoteService1 } from './api/QuoteAPI/services';
+import { weatherService, imageService } from './api/service';
 // import { quoteService2 } from './api/QuoteAPI/services';
 
 function App() {
     return (
-        // <Router>
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/date" element={<DateComponent />} />
@@ -17,10 +17,17 @@ function App() {
                 path="/quote"
                 element={<QuotePage quoteService={quoteService1} />}
             />
-            <Route path="/weather" element={<WeatherPage />} />
+            <Route
+                path="/weather"
+                element={
+                    <WeatherPage
+                        weatherService={weatherService}
+                        imageService={imageService}
+                    />
+                }
+            />
             <Route path="*" element={<NotFound />} />
         </Routes>
-        // </Router>
     );
 }
 

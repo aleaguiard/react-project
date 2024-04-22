@@ -3,7 +3,7 @@ import QuotePage from '../pages/QuotePage';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { setupMockQuote } from './utils/setupMockQuote';
-import { quoteService2 } from '../api/QuoteAPI/services';
+import { quoteService1 } from '../api/QuoteAPI/services';
 
 vi.mock('axios');
 
@@ -11,7 +11,7 @@ describe('QuoteAPI', () => {
     const renderApp = (initialEntries = ['/']) => {
         render(
             <MemoryRouter initialEntries={initialEntries}>
-                <QuotePage quoteService={quoteService2} />
+                <QuotePage quoteService={quoteService1} />
             </MemoryRouter>,
         );
     };

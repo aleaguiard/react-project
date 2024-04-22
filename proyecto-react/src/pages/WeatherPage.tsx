@@ -1,32 +1,14 @@
 import React, { useState } from 'react';
-import Navigation from '../components/Navigation/Navigation';
-import { AxiosHttpClient } from '../api/WeatherAPI/AxiosHttpClient';
-import { WeatherApi } from '../api/WeatherAPI/WeatherApi';
-import { ImageHttpClient } from '../api/ImageAPI/ImageHttpClient';
-import { ImageApi } from '../api/ImageAPI/ImageApi';
-import WeatherData from '../types/IWeatherData';
 import WeatherDisplay from '../components/WeatherInfo/WeatherDisplay';
 import WeatherSearch from '../components/WeatherInfo/WeatherSearch';
-import toast, { Toaster } from 'react-hot-toast';
-import { Service } from '../api/Interfaces/IService';
-import { UnsplashPhotoResponse } from '../types/IUnsplashphoto';
+import Navigation from '../components/Navigation/Navigation';
+import WeatherData from '../types/IWeatherData';
+import { WeatherPageProps } from '../types/IWeatherPageProps';
 
-const WeatherPage: React.FC = () => {
-    const urlApiWeather = import.meta.env.VITE_WEATHER_API_URL;
-    const apiKeyWeather = import.meta.env.VITE_WEATHER_API_KEY;
-    const urlApiImage = import.meta.env.VITE_IMAGE_API_URL;
-    const apiKeyImage = import.meta.env.VITE_IMAGE_API_KEY;
-
-    const httpClientWeather = new AxiosHttpClient(urlApiWeather, apiKeyWeather);
-    const weatherService: Service<WeatherData> = new WeatherApi(
-        httpClientWeather,
-    );
-
-    const httpClientImage = new ImageHttpClient(urlApiImage, apiKeyImage);
-    const imageService: Service<UnsplashPhotoResponse> = new ImageApi(
-        httpClientImage,
-    );
-
+const WeatherPage: React.FC<WeatherPageProps> = ({
+    weatherService,
+    imageService,
+}) => {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [cityImage, setCityImage] = useState<string | null>(null);
     const [description, setDescription] = useState<string | null>(null);
@@ -50,18 +32,18 @@ const WeatherPage: React.FC = () => {
                     setDescription(description);
                 }
             } catch (error) {
-                toast.error('Ciudad no encontrada');
+                // toast.error('Ciudad no encontrada');
             } finally {
                 setIsLoading(false);
             }
         } else {
-            toast.error('Introduce el nombre de una ciudad');
+            // toast.error('Introduce el nombre de una ciudad');
         }
     };
 
     return (
         <div>
-            <Toaster />
+            {/* <Toaster /> */}
             <h1>Tiempo actual</h1>
             <WeatherSearch
                 onButtonClick={handleButtonClick}
