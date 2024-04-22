@@ -1,5 +1,5 @@
-import Quote from '../../types/IQuote';
-import { HttpClient, ApiResponse } from '../IHttpClient';
+import Quote from '../../../types/IQuote';
+import { HttpClient, ApiResponse } from '../../IHttpClient';
 
 export class FetchHttpClient implements HttpClient<Quote[]> {
     constructor(

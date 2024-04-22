@@ -8,7 +8,7 @@ const useFetchQuote = (quoteService: QuoteService) => {
     const [error, setError] = useState<FetchError | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const fetchNewQuote = async (category: string) => {
+    const fetchNewQuote = async (category?: string) => {
         setIsLoading(true);
         try {
             const newQuote = await quoteService.fetchQuote(category);

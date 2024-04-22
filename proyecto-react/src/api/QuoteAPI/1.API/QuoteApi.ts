@@ -1,6 +1,6 @@
-import Quote from '../../types/IQuote';
-import { HttpClient } from '../IHttpClient';
-import { QuoteService } from './IQuoteService';
+import Quote from '../../../types/IQuote';
+import { HttpClient } from '../../IHttpClient';
+import { QuoteService } from '../IQuoteService';
 
 export class QuoteApi implements QuoteService {
     constructor(private httpClient: HttpClient<Quote[]>) {}

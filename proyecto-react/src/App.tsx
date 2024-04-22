@@ -4,6 +4,7 @@ import NotFound from './pages/NotFound';
 import DateComponent from './pages/DateComponent';
 import QuotePage from './pages/QuotePage';
 import WeatherPage from './pages/WeatherPage';
+import { quoteService1 } from './api/QuoteAPI/services';
 
 function App() {
     return (
@@ -11,7 +12,10 @@ function App() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/date" element={<DateComponent />} />
-            <Route path="/quote" element={<QuotePage />} />
+            <Route
+                path="/quote"
+                element={<QuotePage quoteService={quoteService1} />}
+            />
             <Route path="/weather" element={<WeatherPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>

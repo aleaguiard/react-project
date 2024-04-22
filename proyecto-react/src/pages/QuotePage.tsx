@@ -2,20 +2,18 @@ import React from 'react';
 import useFetchQuote from '../hooks/useFetchQuote';
 import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
-import { QuoteApi } from '../api/QuoteAPI/QuoteApi';
-import { FetchHttpClient } from '../api/QuoteAPI/FetchHttpClient';
+import { QuoteService } from '../api/QuoteAPI/IQuoteService';
 
-const QuotePage: React.FC = () => {
-    const urlApi = import.meta.env.VITE_QUOTE_API_URL;
-    const apiKey = import.meta.env.VITE_QUOTE_API_KEY;
-    const httpClient = new FetchHttpClient(urlApi, apiKey);
-    const quoteService = new QuoteApi(httpClient);
+interface QuotePageProps {
+    quoteService: QuoteService;
+}
 
+const QuotePage: React.FC<QuotePageProps> = ({ quoteService }) => {
     const { quote, isLoading, error, fetchNewQuote } =
         useFetchQuote(quoteService);
 
-    const handleClick = (category: string) => {
-        fetchNewQuote(category);
+    const handleClick = async (category?: string) => {
+        await fetchNewQuote(category);
     };
 
     return (
@@ -34,7 +32,8 @@ const QuotePage: React.FC = () => {
                 <Button onClick={() => handleClick('movies')}>Movies</Button>{' '}
                 <Button onClick={() => handleClick('inspirational')}>
                     Inspirational
-                </Button>
+                </Button>{' '}
+                <Button onClick={() => handleClick()}>Inspirational</Button>
             </div>
             <br />
             <br />
