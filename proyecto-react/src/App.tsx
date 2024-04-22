@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
+import DateComponent from './pages/DateComponent';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import DateComponent from './pages/DateComponent';
 import QuotePage from './pages/QuotePage';
 import WeatherPage from './pages/WeatherPage';
-import { quoteService1 } from './api/QuoteAPI/services';
-import { weatherService, imageService } from './api/service';
-// import { quoteService2 } from './api/QuoteAPI/services';
+import { weatherService, imageService } from './api/ApiWeatherService';
+import { quoteService1 } from './api/QuoteAPI/ApiQuoteService';
+// import { quoteService2 } from './api/QuoteAPI/apiQuoteService';
 
 function App() {
     return (
