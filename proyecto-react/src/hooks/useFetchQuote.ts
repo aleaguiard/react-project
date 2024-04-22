@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FetchError } from '../types/IFetchError';
 import Quote from '../types/IQuote';
-import { QuoteService } from '../api/QuoteAPI/IQuoteService';
+import { Service } from '../api/Interfaces/IService';
 
-const useFetchQuote = (quoteService: QuoteService) => {
+const useFetchQuote = <T>(quoteService: Service<T>) => {
     const [quote, setQuote] = useState<Quote | null>(null);
     const [error, setError] = useState<FetchError | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -11,8 +11,8 @@ const useFetchQuote = (quoteService: QuoteService) => {
     const fetchNewQuote = async (category?: string) => {
         setIsLoading(true);
         try {
-            const newQuote = await quoteService.fetchQuote(category);
-            if (newQuote) {
+            const newQuote = await quoteService.fetch(category ?? '');
+            if (Array.isArray(newQuote) && newQuote.length > 0) {
                 setQuote(newQuote[0]);
             } else {
                 setError({ message: 'Response data is empty' });

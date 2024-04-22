@@ -2,10 +2,12 @@ import React from 'react';
 import useFetchQuote from '../hooks/useFetchQuote';
 import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
-import { QuoteService } from '../api/QuoteAPI/IQuoteService';
+// import { QuoteService } from '../api/QuoteAPI/IQuoteService';
+import { Service } from '../api/Interfaces/IService';
+import Quote from '../types/IQuote';
 
 interface QuotePageProps {
-    quoteService: QuoteService;
+    quoteService: Service<Quote[]>;
 }
 
 const QuotePage: React.FC<QuotePageProps> = ({ quoteService }) => {
@@ -23,8 +25,10 @@ const QuotePage: React.FC<QuotePageProps> = ({ quoteService }) => {
             {error && <p>Error: {error.message}</p>}
             {quote && (
                 <div>
-                    <p className="quote">{quote.quote}</p>
-                    <p> {quote.author}</p>
+                    <p className="quote">
+                        {quote && (quote.quote || quote.text)}
+                    </p>
+                    <p>{quote && quote.author}</p>
                 </div>
             )}
             <div className="category-container">
@@ -33,7 +37,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quoteService }) => {
                 <Button onClick={() => handleClick('inspirational')}>
                     Inspirational
                 </Button>{' '}
-                <Button onClick={() => handleClick()}>Inspirational</Button>
+                <Button onClick={() => handleClick()}>Quote of the Day</Button>
             </div>
             <br />
             <br />

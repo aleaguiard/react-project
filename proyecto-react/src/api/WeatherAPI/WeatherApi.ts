@@ -1,13 +1,13 @@
 import WeatherData from '../../types/IWeatherData';
-import { WeatherService } from './IWeatherService';
-import { HttpClient } from '../IHttpClient';
+import { HttpClient } from '../Interfaces/IHttpClient';
+import { Service } from '../Interfaces/IService';
 
-export class WeatherApi implements WeatherService {
+export class WeatherApi implements Service<WeatherData> {
     constructor(private httpClient: HttpClient<WeatherData>) {}
 
-    async fetchWeather(city: string): Promise<WeatherData> {
+    async fetch(url: string): Promise<WeatherData> {
         try {
-            const response = await this.httpClient.get(`?q=${city}`);
+            const response = await this.httpClient.get(url);
             return response.data;
         } catch (error) {
             if (error instanceof Error) {

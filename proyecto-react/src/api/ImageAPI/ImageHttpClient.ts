@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { ApiResponse, HttpClient } from '../IHttpClient';
+import { ApiResponse, HttpClient } from '../Interfaces/IHttpClient';
 import { UnsplashPhotoResponse } from '../../types/IUnsplashphoto';
 
 export class ImageHttpClient implements HttpClient<UnsplashPhotoResponse> {

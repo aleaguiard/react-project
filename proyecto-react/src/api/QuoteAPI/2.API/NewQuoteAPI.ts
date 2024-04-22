@@ -1,15 +1,14 @@
 import Quote from '../../../types/IQuote';
-import { HttpClient } from '../../IHttpClient';
-import { QuoteService } from '../IQuoteService';
+import { HttpClient } from '../../Interfaces/IHttpClient';
+import { Service } from '../../Interfaces/IService';
 
-export class NewQuoteAPI implements QuoteService {
-    private static readonly apiUrl: string = 'https://zenquotes.io/api/today/';
-
+export class NewQuoteAPI implements Service<Quote[]> {
     constructor(private httpClient: HttpClient<Quote[]>) {}
 
-    async fetchQuote(): Promise<Quote[]> {
+    async fetch(url: string): Promise<Quote[]> {
         try {
-            const response = await this.httpClient.get(NewQuoteAPI.apiUrl);
+            const response = await this.httpClient.get(url);
+            console.log(response.data);
             return response.data;
         } catch (error: unknown) {
             throw new Error(`Error fetching data: ${(error as Error).message}`);

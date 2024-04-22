@@ -9,6 +9,7 @@ const fetchHttpClient = new FetchHttpClient(urlApi, apiKey);
 
 export const quoteService1 = new QuoteApi(fetchHttpClient);
 
-const urlApi2 = 'https://zenquotes.io/api/today/';
+const urlApi2 = 'https://type.fit/api/quotes';
 const newHttpClient = new NewHttpClient(urlApi2);
+
 export const quoteService2 = new NewQuoteAPI(newHttpClient);

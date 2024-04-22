@@ -1,15 +1,13 @@
 import { UnsplashPhotoResponse } from '../../types/IUnsplashphoto';
-import { HttpClient } from '../IHttpClient';
-import { ImageService } from './IImageService';
+import { HttpClient } from '../Interfaces/IHttpClient';
+import { Service } from '../Interfaces/IService';
 
-export class ImageApi implements ImageService {
+export class ImageApi implements Service<UnsplashPhotoResponse> {
     constructor(private httpClient: HttpClient<UnsplashPhotoResponse>) {}
 
-    async fetchImage(city: string): Promise<UnsplashPhotoResponse> {
+    async fetch(url: string): Promise<UnsplashPhotoResponse> {
         try {
-            const response = await this.httpClient.get(
-                `search/photos?query=${city}`,
-            );
+            const response = await this.httpClient.get(url);
             return response.data;
         } catch (error) {
             if (error instanceof Error) {

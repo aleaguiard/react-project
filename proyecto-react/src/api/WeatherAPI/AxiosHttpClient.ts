@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { ApiResponse, HttpClient } from '../IHttpClient';
+import { ApiResponse, HttpClient } from '../Interfaces/IHttpClient';
 import WeatherData from '../../types/IWeatherData';
 
 export class AxiosHttpClient implements HttpClient<WeatherData> {

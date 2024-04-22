@@ -5,6 +5,7 @@ import DateComponent from './pages/DateComponent';
 import QuotePage from './pages/QuotePage';
 import WeatherPage from './pages/WeatherPage';
 import { quoteService1 } from './api/QuoteAPI/services';
+// import { quoteService2 } from './api/QuoteAPI/services';
 
 function App() {
     return (
