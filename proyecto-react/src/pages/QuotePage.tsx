@@ -1,69 +1,65 @@
 import React, { useState } from 'react';
-import useFetchQuote from '../hooks/useFetchQuote';
-import Button from '../components/Button/Button';
-import Navigation from '../components/Navigation/Navigation';
-import { QuotePageProps } from '../types/IQuotePageProps';
+
 import { quoteService1, quoteService2 } from '../api/QuoteAPI/ApiQuoteService';
+import { QuotePageProps } from '../types/IQuotePageProps';
+import Button from '../components/Button/Button';
+import { CategoryButtons } from '../components/CategoryButtons/CategoryButtons';
+import { QuoteServiceSelector } from '../components/QuoteServiceSelector/QuoteServiceSelector';
+import useFetchQuote from '../hooks/useFetchQuote';
+import Navigation from '../components/Navigation/Navigation';
 
 const QuotePage: React.FC<QuotePageProps> = () => {
-    const [quoteService, setQuoteService] =
-        useState<typeof quoteService1>(quoteService1);
+    const [quoteService, setQuoteService] = useState<
+        typeof quoteService1 | typeof quoteService2 | 'random' | ''
+    >('');
+    const [showRandomButton, setShowRandomButton] = useState<boolean>(false);
 
     const { quote, isLoading, error, fetchNewQuote } =
         useFetchQuote(quoteService);
 
-    const handleSwitchQuoteService = (
-        selectedService: typeof quoteService1 | typeof quoteService2,
-    ) => {
+    const handleSwitchQuoteService = (selectedService) => {
         setQuoteService(selectedService);
+        setShowRandomButton(false); // Reset random button visibility
     };
 
     const handleClick = async (category?: string) => {
         await fetchNewQuote(category);
+        setShowRandomButton(false); // Hide random button after fetching a quote
+    };
+
+    const handleRandomClick = async () => {
+        setQuoteService('random');
+        await fetchNewQuote(); // Fetch quote from randomly selected API
+        setShowRandomButton(false); // Hide random button after fetching a quote
     };
 
     return (
         <div>
             <h1>Quote</h1>
-            <div className="quote-service-switcher">
-                <label htmlFor="quote-service-select">Quote Service:</label>
-                <select
-                    id="quote-service-select"
-                    value={
-                        quoteService === quoteService1
-                            ? 'Service A'
-                            : 'Service B'
-                    }
-                    onChange={(e) =>
-                        handleSwitchQuoteService(
-                            e.target.value === 'Service A'
-                                ? quoteService1
-                                : quoteService2,
-                        )
-                    }
-                >
-                    <option value="Service A">Service A</option>
-                    <option value="Service B">Service B</option>
-                </select>
-            </div>
+            <QuoteServiceSelector
+                value={quoteService}
+                onChange={(e) => handleSwitchQuoteService(e.target.value)}
+            />
             {isLoading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
             {quote && (
                 <div>
                     <p className="quote">
-                        {quote && (quote.quote || quote.text)}
+                        {quote && (quote.quote || quote.content)}
                     </p>
                     <p>{quote && quote.author}</p>
                 </div>
             )}
-            <div className="category-container">
-                <Button onClick={() => handleClick('humor')}>Humor</Button>{' '}
-                <Button onClick={() => handleClick('movies')}>Movies</Button>{' '}
-                <Button onClick={() => handleClick('inspirational')}>
-                    Inspirational
-                </Button>{' '}
-                <Button onClick={() => handleClick()}>Quote of the Day</Button>
-            </div>
+            {(quoteService === quoteService1 || quoteService === 'random') && (
+                <CategoryButtons onClick={handleClick} />
+            )}
+            {quoteService === quoteService2 && (
+                <Button onClick={handleClick}>Get Quote</Button>
+            )}
+            {quoteService === 'random' && (
+                <Button onClick={handleRandomClick}>Random Quote</Button>
+            )}
+            {quoteService === '' && <p>Selecciona un servicio</p>}
             <br />
             <br />
             <Navigation currentPage="/quote" />

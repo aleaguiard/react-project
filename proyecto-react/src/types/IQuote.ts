@@ -1,6 +1,6 @@
 interface Quote {
     quote?: string;
-    text?: string;
+    content?: string;
     author: string;
     category?: string;
 }
