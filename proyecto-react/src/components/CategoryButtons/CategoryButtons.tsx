@@ -1,21 +1,41 @@
 import Button from '../Button/Button';
+
 import React from 'react';
 
-interface CategoryButtonsProps {
-    onClick: (category?: string) => void;
+interface Props {
+    quoteService: string;
+    handleClick: (category?: string) => void;
+    handleSwitchQuoteService: (service: string) => void;
 }
 
-export const CategoryButtons: React.FC<CategoryButtonsProps> = ({
-    onClick,
+const CategoryButtons: React.FC<Props> = ({
+    quoteService,
+    handleClick,
+    handleSwitchQuoteService,
 }) => {
     return (
         <div className="category-container">
-            <Button onClick={() => onClick('humor')}>Humor</Button>
-            <Button onClick={() => onClick('movies')}>Movies</Button>
-            <Button onClick={() => onClick('inspirational')}>
-                Inspirational
-            </Button>
-            <Button onClick={() => onClick()}>Quote of the Day</Button>
+            {quoteService === 'Service A' && (
+                <>
+                    <Button onClick={() => handleClick('humor')}>Humor</Button>{' '}
+                    <Button onClick={() => handleClick('movies')}>
+                        Movies
+                    </Button>{' '}
+                    <Button onClick={() => handleClick('inspirational')}>
+                        Inspirational
+                    </Button>
+                </>
+            )}
+            {quoteService === 'Service B' && (
+                <Button onClick={() => handleClick()}>Get Quote</Button>
+            )}
+            {quoteService === 'random' && (
+                <Button onClick={() => handleSwitchQuoteService('random')}>
+                    Random Quote
+                </Button>
+            )}
         </div>
     );
 };
+
+export default CategoryButtons;

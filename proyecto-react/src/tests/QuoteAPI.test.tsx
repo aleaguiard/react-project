@@ -3,15 +3,19 @@ import QuotePage from '../pages/QuotePage';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { setupMockQuote } from './utils/setupMockQuote';
-import { quoteService1 } from '../api/QuoteAPI/apiQuoteService';
+import { Service } from '../api/Interfaces/IService';
+import Quote from '../types/IQuote';
+import { quoteService1, quoteService2 } from '../api/QuoteAPI/ApiQuoteService';
 
 vi.mock('axios');
 
 describe('QuoteAPI', () => {
+    const quoteServices: Service<Quote[]>[] = [quoteService1, quoteService2];
+
     const renderApp = (initialEntries = ['/']) => {
         render(
             <MemoryRouter initialEntries={initialEntries}>
-                <QuotePage quoteService={quoteService1} />
+                <QuotePage quoteService={quoteServices} />
             </MemoryRouter>,
         );
     };
@@ -20,6 +24,11 @@ describe('QuoteAPI', () => {
     it('Should render quote data from mockup', async () => {
         setupMockQuote();
         renderApp();
+
+        await act(async () => {
+            const select = screen.getByLabelText('Elige API:');
+            fireEvent.change(select, { target: { value: 'Service A' } });
+        });
 
         await act(async () => {
             const button = screen.getByText('Humor');

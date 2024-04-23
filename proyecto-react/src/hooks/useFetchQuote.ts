@@ -11,11 +11,13 @@ const useFetchQuote = <T>(quoteService: Service<T>) => {
     const fetchNewQuote = async (category?: string) => {
         setIsLoading(true);
         try {
-            const newQuote = await quoteService.fetch(category ?? '');
-            if (Array.isArray(newQuote) && newQuote.length > 0) {
-                setQuote(newQuote[0]);
-            } else {
-                setError({ message: 'Response data is empty' });
+            if (quoteService) {
+                const newQuote = await quoteService.fetch(category ?? '');
+                if (Array.isArray(newQuote) && newQuote.length > 0) {
+                    setQuote(newQuote[0]);
+                } else {
+                    setError({ message: 'Response data is empty' });
+                }
             }
         } catch (err) {
             const errorObj: FetchError = {
