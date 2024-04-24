@@ -4,29 +4,42 @@ import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
 import { QuotePageProps } from '../types/IQuotePageProps';
 import { quoteService1, quoteService2 } from '../api/QuoteAPI/ApiQuoteService';
+import { Service } from '../api/Interfaces/IService';
+import Quote from '../types/IQuote';
 
 const QuotePage: React.FC<QuotePageProps> = () => {
-    const [quoteService, setQuoteService] = useState<
-        typeof quoteService1 | typeof quoteService2 | null
-    >(null);
-
+    const [selectedOption, setSelectedOption] = useState<string>('');
+    const [quoteService, setQuoteService] =
+        useState<Service<Quote>>(quoteService1);
     const { quote, isLoading, error, fetchNewQuote } =
         useFetchQuote(quoteService);
 
-    const handleSwitchQuoteService = (
-        selectedService: typeof quoteService1 | typeof quoteService2 | null,
+    const handleOptionSelect = (
+        event: React.ChangeEvent<HTMLSelectElement>,
     ) => {
-        setQuoteService(selectedService);
+        const selectedValue = event.target.value;
+        setSelectedOption(selectedValue);
+        if (selectedValue === 'Service A') {
+            setQuoteService(quoteService1);
+        } else if (selectedValue === 'Service B') {
+            setQuoteService(quoteService2);
+        } else if (selectedValue === 'Random') {
+            setRandomService();
+        }
+    };
+
+    const setRandomService = () => {
+        const randomService =
+            Math.random() < 0.5 ? quoteService1 : quoteService2;
+        setQuoteService(randomService);
     };
 
     const handleClick = async (category?: string) => {
-        if (quoteService) {
-            await fetchNewQuote(category);
+        if (selectedOption === 'Random') {
+            setRandomService();
+            fetchNewQuote();
         } else {
-            const randomService =
-                Math.random() < 0.5 ? quoteService1 : quoteService2;
-            setQuoteService(randomService);
-            await fetchNewQuote();
+            await fetchNewQuote(category);
         }
     };
 
@@ -37,31 +50,18 @@ const QuotePage: React.FC<QuotePageProps> = () => {
                 <label htmlFor="quote-service-select">Elige API: </label>
                 <select
                     id="quote-service-select"
-                    value={
-                        quoteService === quoteService1
-                            ? 'Service A'
-                            : quoteService === quoteService2
-                              ? 'Service B'
-                              : ''
-                    }
-                    onChange={(e) =>
-                        handleSwitchQuoteService(
-                            e.target.value === 'Service A'
-                                ? quoteService1
-                                : e.target.value === 'Service B'
-                                  ? quoteService2
-                                  : null,
-                        )
-                    }
+                    value={selectedOption}
+                    onChange={handleOptionSelect}
                 >
-                    <option value=""></option>
+                    <option></option>
+                    <option value="Random">Aleatorio</option>
                     <option value="Service A">Ninja Api</option>
                     <option value="Service B">Quotable</option>
                 </select>
             </div>
             {isLoading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
-            {quote && (
+            {quote && selectedOption && (
                 <div>
                     <p className="quote">
                         {quote && (quote.quote || quote.content)}
@@ -70,7 +70,7 @@ const QuotePage: React.FC<QuotePageProps> = () => {
                 </div>
             )}
             <div className="category-container">
-                {quoteService === quoteService1 && (
+                {selectedOption === 'Service A' && (
                     <>
                         <br />
                         <Button onClick={() => handleClick('humor')}>
@@ -84,13 +84,13 @@ const QuotePage: React.FC<QuotePageProps> = () => {
                         </Button>
                     </>
                 )}
-                {quoteService === quoteService2 && (
+                {selectedOption === 'Service B' && (
                     <>
                         <br />
                         <Button onClick={() => handleClick()}>New Quote</Button>
                     </>
                 )}
-                {quoteService === null && (
+                {selectedOption === 'Random' && (
                     <>
                         <br />
                         <Button onClick={() => handleClick()}>

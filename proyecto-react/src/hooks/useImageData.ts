@@ -20,7 +20,7 @@ const useCityImage = (
                         `search/photos?query=${city}`,
                     );
                     if (results.length > 0) {
-                        const { description, urls } = results[0];
+                        const { description, urls } = results[1];
                         setCityImage(urls.regular);
                         setDescription(description);
                     }

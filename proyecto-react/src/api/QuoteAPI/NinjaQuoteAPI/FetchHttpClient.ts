@@ -7,9 +7,9 @@ export class FetchHttpClient implements HttpClient<Quote[]> {
         private apiKey: string,
     ) {}
 
-    async get(url: string): Promise<ApiResponse<Quote[]>> {
+    async get(urlEndPoint: string): Promise<ApiResponse<Quote[]>> {
         try {
-            const response = await fetch(`${this.apiUrl}${url}`, {
+            const response = await fetch(`${this.apiUrl}${urlEndPoint}`, {
                 headers: {
                     'X-Api-Key': this.apiKey,
                 },

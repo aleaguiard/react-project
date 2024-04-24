@@ -10,12 +10,12 @@ import { quoteService1, quoteService2 } from '../api/QuoteAPI/ApiQuoteService';
 vi.mock('axios');
 
 describe('QuoteAPI', () => {
-    const quoteServices: Service<Quote[]>[] = [quoteService1, quoteService2];
+    const quoteServices: Service<Quote>[] = [quoteService1, quoteService2];
 
     const renderApp = (initialEntries = ['/']) => {
         render(
             <MemoryRouter initialEntries={initialEntries}>
-                <QuotePage quoteService={quoteServices} />
+                <QuotePage quoteService={quoteServices[0]} />
             </MemoryRouter>,
         );
     };
@@ -25,10 +25,8 @@ describe('QuoteAPI', () => {
         setupMockQuote();
         renderApp();
 
-        await act(async () => {
-            const select = screen.getByLabelText('Elige API:');
-            fireEvent.change(select, { target: { value: 'Service A' } });
-        });
+        const select = screen.getByLabelText('Elige API:');
+        fireEvent.change(select, { target: { value: 'Service A' } });
 
         await act(async () => {
             const button = screen.getByText('Humor');

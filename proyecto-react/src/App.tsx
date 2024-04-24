@@ -10,14 +10,14 @@ import { Service } from './api/Interfaces/IService';
 import Quote from './types/IQuote';
 
 function App() {
-    const quoteServices: Service<Quote[]>[] = [quoteService1, quoteService2];
+    const quoteServices: Service<Quote>[] = [quoteService1, quoteService2];
     return (
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/date" element={<DateComponent />} />
             <Route
                 path="/quote"
-                element={<QuotePage quoteService={quoteServices} />}
+                element={<QuotePage quoteService={quoteServices[0]} />}
             />
             <Route
                 path="/weather"
