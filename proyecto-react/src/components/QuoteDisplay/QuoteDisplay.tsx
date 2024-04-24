@@ -3,34 +3,23 @@ import Quote from '../../types/IQuote';
 
 interface QuoteDisplayProps {
     quote: Quote | null;
-    isLoading: boolean;
-    error: Error | null;
+    selectedOption: string;
 }
 
 const QuoteDisplay: React.FC<QuoteDisplayProps> = ({
     quote,
-    isLoading,
-    error,
+    selectedOption,
 }) => {
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
-
-    if (error) {
-        return <p>Error: {error.message}</p>;
-    }
-
-    if (!quote) {
-        return null;
-    }
-
-    const quoteText = quote.quote || quote.content || 'No quote available';
-    const author = quote.author || 'Unknown author';
-
     return (
         <div>
-            <p className="quote">{quoteText}</p>
-            <p>{author}</p>
+            {quote && selectedOption && (
+                <div>
+                    <p className="quote">
+                        {quote && (quote.quote || quote.content)}
+                    </p>
+                    <p>{quote && quote.author}</p>
+                </div>
+            )}
         </div>
     );
 };

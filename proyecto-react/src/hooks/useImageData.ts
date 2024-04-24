@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-// import { ImageApi } from '../api/ImageAPI/ImageApi';
 import { Service } from '../api/Interfaces/IService';
 import { UnsplashPhotoResponse } from '../types/IUnsplashphoto';
 
-const useCityImage = (
+const useFetchCityImage = (
     city: string,
     imageService: Service<UnsplashPhotoResponse>,
 ) => {
@@ -20,7 +19,7 @@ const useCityImage = (
                         `search/photos?query=${city}`,
                     );
                     if (results.length > 0) {
-                        const { description, urls } = results[1];
+                        const { description, urls } = results[0];
                         setCityImage(urls.regular);
                         setDescription(description);
                     }
@@ -37,4 +36,4 @@ const useCityImage = (
     return { cityImage, description, isLoading };
 };
 
-export default useCityImage;
+export default useFetchCityImage;

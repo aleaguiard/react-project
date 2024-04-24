@@ -1,28 +1,29 @@
 import React from 'react';
 
-interface Props {
-    quoteService: string;
-    handleSwitchQuoteService: (service: string) => void;
+interface QuoteServiceSelectProps {
+    selectedOption: string;
+    handleOptionSelect: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const QuoteServiceSwitcherComponent: React.FC<Props> = ({
-    quoteService,
-    handleSwitchQuoteService,
+const QuoteServiceSelect: React.FC<QuoteServiceSelectProps> = ({
+    selectedOption,
+    handleOptionSelect,
 }) => {
     return (
         <div className="quote-service-switcher">
             <label htmlFor="quote-service-select">Elige API: </label>
             <select
                 id="quote-service-select"
-                value={quoteService}
-                onChange={(e) => handleSwitchQuoteService(e.target.value)}
+                value={selectedOption}
+                onChange={handleOptionSelect}
             >
+                <option></option>
+                <option value="Random">Aleatorio</option>
                 <option value="Service A">Ninja Api</option>
                 <option value="Service B">Quotable</option>
-                <option value="Random">Aleatorio</option>
             </select>
         </div>
     );
 };
 
-export default QuoteServiceSwitcherComponent;
+export default QuoteServiceSelect;

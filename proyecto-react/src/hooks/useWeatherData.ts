@@ -1,24 +1,21 @@
 import { useState } from 'react';
-import WeatherData from '../types/IWeatherData';
-import 'react-toastify/dist/ReactToastify.css';
 import { Service } from '../api/Interfaces/IService';
+import WeatherData from '../types/IWeatherData';
 
 const useWeatherData = (weatherService: Service<WeatherData>) => {
-    const [city, setCity] = useState('');
+    const [city, setCity] = useState<string>('');
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
-    const fetchWeatherData = async () => {
-        try {
-            const response = await weatherService.fetch(`?q=${city}`);
-            setWeatherData(response);
-        } catch (error) {
-            console.error('Error al obtener los datos del clima:', error);
-        }
-    };
-
-    const handleButtonClick = () => {
+    const handleButtonClick = async () => {
         if (city.trim() !== '') {
-            fetchWeatherData();
+            try {
+                const response = await weatherService.fetch(`?q=${city}`);
+                setWeatherData(response);
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        } else {
+            console.error('Introduce el nombre de una ciudad');
         }
     };
 
