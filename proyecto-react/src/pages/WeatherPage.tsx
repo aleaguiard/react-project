@@ -4,6 +4,7 @@ import WeatherSearch from '../components/WeatherInfo/WeatherSearch';
 import Navigation from '../components/Navigation/Navigation';
 import WeatherData from '../types/IWeatherData';
 import { WeatherPageProps } from '../types/IWeatherPageProps';
+// import toast, { Toaster } from 'react-hot-toast';
 
 const WeatherPage: React.FC<WeatherPageProps> = ({
     weatherService,
