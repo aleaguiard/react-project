@@ -1,10 +1,6 @@
 import React from 'react';
 import Button from '../Button/Button';
-
-interface CategoryButtonsProps {
-    selectedOption: string;
-    handleClick: (category?: string) => void;
-}
+import { CategoryButtonsProps } from '../../types/ICategoryButtonsProps';
 
 const CategoryButtons: React.FC<CategoryButtonsProps> = ({
     selectedOption,

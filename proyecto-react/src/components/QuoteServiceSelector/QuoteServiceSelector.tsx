@@ -1,9 +1,5 @@
 import React from 'react';
-
-interface QuoteServiceSelectProps {
-    selectedOption: string;
-    handleOptionSelect: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}
+import { QuoteServiceSelectProps } from '../../types/IQuoteServiceSelectProps';
 
 const QuoteServiceSelect: React.FC<QuoteServiceSelectProps> = ({
     selectedOption,

@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Service } from '../api/Interfaces/IService';
 import { UnsplashPhotoResponse } from '../types/IUnsplashphoto';
-
+/**
+ * Custom hook to fetch an image for a given city using an image service.
+ * @param city - The name of the city for which to fetch an image.
+ * @param imageService - The service to use for fetching the image.
+ * @returns An object containing the fetched city image URL, its description, and a boolean indicating whether the image is currently being fetched.
+ */
 const useFetchCityImage = (
     city: string,
     imageService: Service<UnsplashPhotoResponse>,

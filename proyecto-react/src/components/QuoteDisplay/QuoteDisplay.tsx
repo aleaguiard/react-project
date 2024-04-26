@@ -1,10 +1,5 @@
 import React from 'react';
-import Quote from '../../types/IQuote';
-
-interface QuoteDisplayProps {
-    quote: Quote | null;
-    selectedOption: string;
-}
+import { QuoteDisplayProps } from '../../types/IQuoteDisplayProps';
 
 const QuoteDisplay: React.FC<QuoteDisplayProps> = ({
     quote,

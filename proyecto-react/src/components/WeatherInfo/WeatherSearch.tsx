@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../Button/Button';
-
-interface WeatherSearchProps {
-    onButtonClick: (city: string) => void;
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { WeatherSearchProps } from '../../types/IWeatherSearchProps';
 
 const WeatherSearch: React.FC<WeatherSearchProps> = ({ onButtonClick }) => {
     const [city, setCity] = useState('');

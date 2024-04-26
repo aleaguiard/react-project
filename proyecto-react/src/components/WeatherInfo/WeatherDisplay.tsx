@@ -1,13 +1,6 @@
 import React from 'react';
-import WeatherData from '../../types/IWeatherData';
 import WeatherInfo from './WeatherInfo';
-
-interface WeatherDisplayProps {
-    weatherData: WeatherData | null;
-    cityImage: string | null;
-    description: string | null;
-    isLoading: boolean;
-}
+import { WeatherDisplayProps } from '../../types/IWeatherDisplayProps';
 
 const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
     weatherData,

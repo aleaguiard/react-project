@@ -1,10 +1,10 @@
 import Quote from '../../../types/IQuote';
 import { HttpClient, ApiResponse } from '../../Interfaces/IHttpClient';
 
-export class NewHttpClient implements HttpClient<Quote[]> {
+export class NewHttpClient implements HttpClient<Quote> {
     constructor(private apiUrl: string) {}
 
-    async get(): Promise<ApiResponse<Quote[]>> {
+    async get(): Promise<ApiResponse<Quote>> {
         try {
             const response = await fetch(this.apiUrl);
             if (!response.ok) {
