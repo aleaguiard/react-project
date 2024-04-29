@@ -23,7 +23,6 @@
       "warn",
       { "allowConstantExport": true }
     ],
-    "prettier/prettier": "error"
-  }
+    "no-trailing-spaces": "off"
+    }
 }
-
