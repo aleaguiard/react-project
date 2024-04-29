@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import DateComponent from './pages/DateComponent';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
@@ -10,22 +10,35 @@ import { Service } from './api/Interfaces/IService';
 import Quote from './types/IQuote';
 
 function App() {
+    const isLogged = false;
+
     const quoteServices: Service<Quote>[] = [quoteService1, quoteService2];
+
     return (
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/date" element={<DateComponent />} />
             <Route
                 path="/quote"
-                element={<QuotePage quoteService={quoteServices[0]} />}
+                element={
+                    isLogged ? (
+                        <QuotePage quoteService={quoteServices[0]} />
+                    ) : (
+                        <Navigate to="/" />
+                    )
+                }
             />
             <Route
                 path="/weather"
                 element={
-                    <WeatherPage
-                        weatherService={weatherService}
-                        imageService={imageService}
-                    />
+                    isLogged ? (
+                        <WeatherPage
+                            weatherService={weatherService}
+                            imageService={imageService}
+                        />
+                    ) : (
+                        <Navigate to="/" />
+                    )
                 }
             />
             <Route path="*" element={<NotFound />} />
