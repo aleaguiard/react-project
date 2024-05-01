@@ -4,4 +4,5 @@ module.exports = {
     tabWidth: 4,
     trailingComma: 'all',
     parser: 'typescript',
+    printWidth: 80,
 };

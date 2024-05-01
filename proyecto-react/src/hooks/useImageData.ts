@@ -7,7 +7,7 @@ import { UnsplashPhotoResponse } from '../types/IUnsplashphoto';
  * @param imageService - The service to use for fetching the image.
  * @returns An object containing the fetched city image URL, its description, and a boolean indicating whether the image is currently being fetched.
  */
-const useFetchCityImage = (
+const useImageData = (
     city: string,
     imageService: Service<UnsplashPhotoResponse>,
 ) => {
@@ -41,4 +41,4 @@ const useFetchCityImage = (
     return { cityImage, description, isLoading };
 };
 
-export default useFetchCityImage;
+export default useImageData;

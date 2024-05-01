@@ -8,7 +8,7 @@ import { Service } from '../api/Interfaces/IService';
  * @param quoteService - The service to fetch the quote from.
  * @returns An object containing the fetched quote, any error that occurred during the fetch, and a boolean indicating whether the fetch is currently in progress.
  */
-const useFetchQuote = <T>(
+const useQuoteData = <T>(
     quoteService: Service<T>,
 ): {
     quote: Quote | null;
@@ -48,4 +48,4 @@ const useFetchQuote = <T>(
     return { quote, error, isLoading, fetchNewQuote };
 };
 
-export default useFetchQuote;
+export default useQuoteData;

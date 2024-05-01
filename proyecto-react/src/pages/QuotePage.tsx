@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useFetchQuote from '../hooks/useFetchQuote';
+import useQuoteData from '../hooks/useQuoteData';
 import Navigation from '../components/Navigation/Navigation';
 import { QuotePageProps } from '../types/IQuotePageProps';
 import { quoteService1, quoteService2 } from '../api/QuoteAPI/ApiQuoteService';
@@ -14,7 +14,7 @@ const QuotePage: React.FC<QuotePageProps> = () => {
     const [quoteService, setQuoteService] =
         useState<Service<Quote>>(quoteService1);
     const { quote, isLoading, error, fetchNewQuote } =
-        useFetchQuote(quoteService);
+        useQuoteData(quoteService);
 
     const handleOptionSelect = (
         event: React.ChangeEvent<HTMLSelectElement>,

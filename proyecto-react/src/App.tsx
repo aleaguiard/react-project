@@ -10,7 +10,7 @@ import { Service } from './api/Interfaces/IService';
 import Quote from './types/IQuote';
 
 function App() {
-    const isLogged = false;
+    const isLogged = true;
 
     const quoteServices: Service<Quote>[] = [quoteService1, quoteService2];
 
