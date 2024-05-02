@@ -6,8 +6,6 @@ import WeatherData from '../types/IWeatherData';
 import { WeatherPageProps } from '../types/IWeatherPageProps';
 // import toast, { Toaster } from 'react-hot-toast';
 
-console.log('WeatherPage');
-
 const WeatherPage: React.FC<WeatherPageProps> = ({
     weatherService,
     imageService,

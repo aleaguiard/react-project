@@ -1,8 +1,6 @@
 import Button from '../components/Button/Button';
 import Navigation from '../components/Navigation/Navigation';
 
-console.log('HomePage');
-
 function Home() {
     return (
         <div>

@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import useQuoteData from '../hooks/useQuoteData';
 import Navigation from '../components/Navigation/Navigation';
 import { QuotePageProps } from '../types/IQuotePageProps';
-import { quoteService1, quoteService2 } from '../api/QuoteAPI/ApiQuoteService';
+import {
+    getQuoteService1,
+    getQuoteService2,
+} from '../api/QuoteAPI/ApiQuoteService';
 import { Service } from '../api/Interfaces/IService';
 import Quote from '../types/IQuote';
 import QuoteServiceSelect from '../components/QuoteServiceSelector/QuoteServiceSelector';
 import CategoryButtons from '../components/CategoryButtons/CategoryButtons';
 import QuoteDisplay from '../components/QuoteDisplay/QuoteDisplay';
 
-console.log('QuotePage');
-
 const QuotePage: React.FC<QuotePageProps> = () => {
     const [selectedOption, setSelectedOption] = useState<string>('');
     const [quoteService, setQuoteService] =
-        useState<Service<Quote>>(quoteService1);
+        useState<Service<Quote>>(getQuoteService1);
     const { quote, isLoading, error, fetchNewQuote } =
         useQuoteData(quoteService);
 
@@ -25,8 +26,14 @@ const QuotePage: React.FC<QuotePageProps> = () => {
         setSelectedOption(selectedValue);
 
         const services = [
-            { name: 'Service A', action: () => setQuoteService(quoteService1) },
-            { name: 'Service B', action: () => setQuoteService(quoteService2) },
+            {
+                name: 'Service A',
+                action: () => setQuoteService(getQuoteService1),
+            },
+            {
+                name: 'Service B',
+                action: () => setQuoteService(getQuoteService2),
+            },
             { name: 'Random', action: setRandomService },
         ];
 
@@ -40,7 +47,7 @@ const QuotePage: React.FC<QuotePageProps> = () => {
 
     const setRandomService = () => {
         const randomService =
-            Math.random() < 0.5 ? quoteService1 : quoteService2;
+            Math.random() < 0.5 ? getQuoteService1 : getQuoteService2;
         setQuoteService(randomService);
     };
 

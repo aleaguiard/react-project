@@ -1,15 +1,11 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Suspense } from 'react';
 import Home from './pages/Home';
-import {
-    LazyWeatherPage,
-    LazyQuotePage,
-    isLogged,
-    quoteServices,
-} from './constants';
-import { weatherService, imageService } from './api/ApiWeatherService';
+import { LazyWeatherPage, LazyQuotePage, isLogged } from './constants';
 import NotFound from './pages/NotFound';
 import DateComponent from './pages/DateComponent';
+import { getQuoteService1 } from './api/QuoteAPI/ApiQuoteService';
+import { getImageService, getWeatherService } from './api/ApiWeatherService';
 
 function App() {
     return (
@@ -21,7 +17,7 @@ function App() {
                 element={
                     isLogged ? (
                         <Suspense fallback={<p>Loading...</p>}>
-                            <LazyQuotePage quoteService={quoteServices[0]} />
+                            <LazyQuotePage quoteService={getQuoteService1()} />
                         </Suspense>
                     ) : (
                         <Navigate to="/" />
@@ -34,8 +30,8 @@ function App() {
                     isLogged ? (
                         <Suspense fallback={<p>Loading...</p>}>
                             <LazyWeatherPage
-                                weatherService={weatherService}
-                                imageService={imageService}
+                                weatherService={getWeatherService()}
+                                imageService={getImageService()}
                             />
                         </Suspense>
                     ) : (

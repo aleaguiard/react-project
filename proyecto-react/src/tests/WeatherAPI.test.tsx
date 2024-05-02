@@ -10,7 +10,7 @@ import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { mockedWeatherData, setupMockWeather } from './utils/setupMockWeather';
 import WeatherPage from '../pages/WeatherPage';
-import { weatherService, imageService } from '../api/ApiWeatherService';
+import { getWeatherService, getImageService } from '../api/ApiWeatherService';
 
 vi.mock('axios');
 
@@ -19,8 +19,8 @@ describe('WeatherAPI', () => {
         render(
             <MemoryRouter initialEntries={initialEntries}>
                 <WeatherPage
-                    weatherService={weatherService}
-                    imageService={imageService}
+                    weatherService={getWeatherService()}
+                    imageService={getImageService()}
                 />{' '}
             </MemoryRouter>,
         );

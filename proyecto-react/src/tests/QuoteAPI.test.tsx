@@ -3,19 +3,15 @@ import QuotePage from '../pages/QuotePage';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { setupMockQuote } from './utils/setupMockQuote';
-import { Service } from '../api/Interfaces/IService';
-import Quote from '../types/IQuote';
-import { quoteService1, quoteService2 } from '../api/QuoteAPI/ApiQuoteService';
+import { getQuoteService1 } from '../api/QuoteAPI/ApiQuoteService';
 
 vi.mock('axios');
 
 describe('QuoteAPI', () => {
-    const quoteServices: Service<Quote>[] = [quoteService1, quoteService2];
-
     const renderApp = (initialEntries = ['/']) => {
         render(
             <MemoryRouter initialEntries={initialEntries}>
-                <QuotePage quoteService={quoteServices[0]} />
+                <QuotePage quoteService={getQuoteService1()} />
             </MemoryRouter>,
         );
     };
