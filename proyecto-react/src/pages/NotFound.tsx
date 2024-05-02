@@ -1,5 +1,7 @@
 import Navigation from '../components/Navigation/Navigation';
 
+console.log('NotFoundPage');
+
 function NotFound() {
     return (
         <div>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation/Navigation';
 
+console.log('DateComponent');
+
 const DateComponent = () => {
     const [dateTime, setDateTime] = useState(new Date());
 

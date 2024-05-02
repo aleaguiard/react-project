@@ -1,19 +1,17 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import DateComponent from './pages/DateComponent';
+import { Suspense } from 'react';
 import Home from './pages/Home';
-import NotFound from './pages/NotFound';
-import QuotePage from './pages/QuotePage';
-import WeatherPage from './pages/WeatherPage';
+import {
+    LazyWeatherPage,
+    LazyQuotePage,
+    isLogged,
+    quoteServices,
+} from './constants';
 import { weatherService, imageService } from './api/ApiWeatherService';
-import { quoteService1, quoteService2 } from './api/QuoteAPI/ApiQuoteService';
-import { Service } from './api/Interfaces/IService';
-import Quote from './types/IQuote';
+import NotFound from './pages/NotFound';
+import DateComponent from './pages/DateComponent';
 
 function App() {
-    const isLogged = true;
-
-    const quoteServices: Service<Quote>[] = [quoteService1, quoteService2];
-
     return (
         <Routes>
             <Route path="/" element={<Home />} />
@@ -22,7 +20,9 @@ function App() {
                 path="/quote"
                 element={
                     isLogged ? (
-                        <QuotePage quoteService={quoteServices[0]} />
+                        <Suspense fallback={<p>Loading...</p>}>
+                            <LazyQuotePage quoteService={quoteServices[0]} />
+                        </Suspense>
                     ) : (
                         <Navigate to="/" />
                     )
@@ -32,10 +32,12 @@ function App() {
                 path="/weather"
                 element={
                     isLogged ? (
-                        <WeatherPage
-                            weatherService={weatherService}
-                            imageService={imageService}
-                        />
+                        <Suspense fallback={<p>Loading...</p>}>
+                            <LazyWeatherPage
+                                weatherService={weatherService}
+                                imageService={imageService}
+                            />
+                        </Suspense>
                     ) : (
                         <Navigate to="/" />
                     )

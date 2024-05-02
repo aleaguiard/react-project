@@ -9,6 +9,8 @@ import QuoteServiceSelect from '../components/QuoteServiceSelector/QuoteServiceS
 import CategoryButtons from '../components/CategoryButtons/CategoryButtons';
 import QuoteDisplay from '../components/QuoteDisplay/QuoteDisplay';
 
+console.log('QuotePage');
+
 const QuotePage: React.FC<QuotePageProps> = () => {
     const [selectedOption, setSelectedOption] = useState<string>('');
     const [quoteService, setQuoteService] =
