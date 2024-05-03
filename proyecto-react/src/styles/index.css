@@ -100,3 +100,35 @@ blockquote {
   background-color: rgb(197, 220, 234);
   border-radius: 10px;
 }
+
+.navBar {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex; 
+  padding: 10px;
+}
+
+.elementsNav {
+  display: flex;
+  width: 100%;
+  justify-content: center;}
+
+.nameLogin {
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  padding: 10px 10px;
+}
+
+.btnLogout {
+  background-color: #ff1e006a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
