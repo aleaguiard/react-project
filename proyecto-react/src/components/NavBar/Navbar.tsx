@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auth/context/AuthContext';
 
 export const Navbar = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { user, logout, login, logged } = useContext(AuthContext);
     console.log(user);
 
     const navigate = useNavigate();
@@ -15,13 +15,26 @@ export const Navbar = () => {
         });
     };
 
+    const handleLogin = () => {
+        login('User');
+        navigate('/', {
+            replace: true,
+        });
+    };
+
     return (
         <nav className="navBar">
             <div className="elementsNav">
                 <span className="nameLogin">{user?.name}</span>
-                <button className="btnLogout" onClick={handleLogout}>
-                    Logout
-                </button>
+                {logged ? (
+                    <button className="btnLogout" onClick={handleLogout}>
+                        Logout
+                    </button>
+                ) : (
+                    <button className="btnLogin" onClick={handleLogin}>
+                        Login
+                    </button>
+                )}
             </div>
         </nav>
     );
