@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auth/context/AuthContext';
 
 export const Navbar = () => {
-    const { user, logout, login, logged } = useContext(AuthContext);
+    const { user, logout, logged } = useContext(AuthContext);
     console.log(user);
 
     const navigate = useNavigate();
@@ -14,12 +14,16 @@ export const Navbar = () => {
             replace: true,
         });
     };
-
-    const handleLogin = () => {
-        login('User');
-        navigate('/', {
-            replace: true,
-        });
+    const handleClick = () => {
+        if (location.pathname === '/login') {
+            navigate('/', {
+                replace: true,
+            });
+        } else {
+            navigate('/login', {
+                replace: true,
+            });
+        }
     };
 
     return (
@@ -31,8 +35,8 @@ export const Navbar = () => {
                         Logout
                     </button>
                 ) : (
-                    <button className="btnLogin" onClick={handleLogin}>
-                        Login
+                    <button className="btnLogin" onClick={handleClick}>
+                        {location.pathname === '/login' ? 'Home' : 'Login'}{' '}
                     </button>
                 )}
             </div>

@@ -2,6 +2,7 @@ import { useReducer } from 'react';
 import { AuthContext } from './AuthContext';
 import { authReducer } from './authReducer';
 import { AuthAction, AuthActionTypes } from '../types/types';
+import { users } from '../../mocks/usersData';
 
 const init = () => {
     const userString = localStorage.getItem('user');
@@ -15,21 +16,30 @@ const init = () => {
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [authState, dispatch] = useReducer(authReducer, {}, init);
 
-    const login = (name: string) => {
-        const user = { id: '1', name };
-        const action: AuthAction = {
-            type: AuthActionTypes.LOGIN,
-            payload: user,
-        };
-        localStorage.setItem('user', JSON.stringify(user));
-        dispatch(action);
+    const login = (username: string, password: string) => {
+        const user = users.users.find(
+            (user) => user.nombre === username && user.password === password,
+        );
+
+        if (user) {
+            const action: AuthAction = {
+                type: AuthActionTypes.LOGIN,
+                payload: {
+                    id: user.id,
+                    name: user.nombre,
+                    password: user.password,
+                },
+            };
+            localStorage.setItem('user', JSON.stringify(action.payload));
+            dispatch(action);
+        }
     };
 
     const logout = () => {
+        localStorage.removeItem('user');
         const action: AuthAction = {
             type: AuthActionTypes.LOGOUT,
         };
-        localStorage.removeItem('user');
         dispatch(action);
     };
 
