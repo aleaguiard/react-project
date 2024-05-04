@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { users } from '../../mocks/usersData';
 import Button from '../../components/Button/Button';
+import toast, { Toaster } from 'react-hot-toast';
 
 export const LoginPage = () => {
-    const { login } = useContext(AuthContext);
+    const { login, logged } = useContext(AuthContext);
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -18,14 +18,15 @@ export const LoginPage = () => {
             login(username, password);
             navigate('/');
         } else {
-            setError('Credenciales incorrectas.');
+            toast.error('Credenciales incorrectas.');
         }
     };
 
     return (
         <div className="container mt-5">
+            <Toaster />
             <h1>Login</h1>
-            {error && <p className="text-danger">{error}</p>}
+            <div></div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="username" className="form-label">
@@ -51,7 +52,7 @@ export const LoginPage = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <Button>Login</Button>
+                {!logged && <Button>Login</Button>}{' '}
             </form>
         </div>
     );

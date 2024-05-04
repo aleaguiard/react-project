@@ -95,7 +95,7 @@ blockquote {
 .date-container {
   border: 2px solid #ccc;
   padding: 5px;
-  width: 500px; 
+  width: auto; 
   text-align: center;
   background-color: rgb(197, 220, 234);
   border-radius: 10px;
@@ -114,7 +114,7 @@ blockquote {
 .elementsNav {
   display: flex;
   width: 100%;
-  justify-content: center;}
+  justify-content: flex-end;}
 
 .nameLogin {
   color: rgb(0, 0, 0);
@@ -122,7 +122,7 @@ blockquote {
   padding: 10px 10px;
 }
 
-.btnLogout {
+.btnLogout, .btnLogin {
   background-color: #ff1e006a;
   color: white;
   border: none;
@@ -133,13 +133,6 @@ blockquote {
   transition: background-color 0.3s ease;
 }
 
-.btnLogin {
-  background-color: #003cff6a;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 15px;
-  margin-right: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.btnLogin  {
+  background-color: #007bff;
 }

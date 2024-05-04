@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
     return logged ? (
         <React.Suspense fallback={<p>Loading...</p>}>{children}</React.Suspense>
     ) : (
-        <Navigate to="/login" replace />
+        <Navigate to="/login" />
     );
 };
 
