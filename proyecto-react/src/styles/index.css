@@ -136,3 +136,44 @@ blockquote {
 .btnLogin  {
   background-color: #007bff;
 }
+
+.container-form {
+    margin-top: 5rem;
+}
+
+.form-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.label-username {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-username {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.label-pwd {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-pwd {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}

@@ -23,36 +23,35 @@ export const LoginPage = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container-form">
             <Toaster />
-            <h1>Login</h1>
-            <div></div>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="username" className="form-label">
+            <h1 className="title">Login</h1>
+            <form className="form-wrapper" onSubmit={handleSubmit}>
+                <div className="input-group">
+                    <label className="label-username" htmlFor="username">
                         Username
                     </label>
                     <input
+                        className="input-username"
                         type="text"
-                        className="form-control"
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">
+                <div className="input-group">
+                    <label className="label-pwd" htmlFor="password">
                         Password
                     </label>
                     <input
+                        className="input-pwd"
                         type="password"
-                        className="form-control"
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                {!logged && <Button>Login</Button>}{' '}
+                {!logged && <Button>Login</Button>}
             </form>
         </div>
     );
