@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { Suspense } from 'react';
 import Home from './pages/Home';
 import { LazyWeatherPage, LazyQuotePage } from './constants';
 import NotFound from './pages/NotFound';
@@ -9,6 +8,7 @@ import { getImageService, getWeatherService } from './api/ApiWeatherService';
 import { Navbar } from './components/NavBar/Navbar';
 import { LoginPage } from './auth/pages/LoginPage';
 import { AuthProvider } from './auth/context/AuthProvider';
+import PrivateRoute from './router/PrivateRoute';
 
 function App() {
     return (
@@ -22,22 +22,26 @@ function App() {
                     <Route
                         path="/quote"
                         element={
-                            <Suspense fallback={<p>Loading...</p>}>
-                                <LazyQuotePage
-                                    quoteService={getQuoteService1()}
-                                />
-                            </Suspense>
+                            <PrivateRoute
+                                children={
+                                    <LazyQuotePage
+                                        quoteService={getQuoteService1()}
+                                    />
+                                }
+                            />
                         }
                     />
                     <Route
                         path="/weather"
                         element={
-                            <Suspense fallback={<p>Loading...</p>}>
-                                <LazyWeatherPage
-                                    weatherService={getWeatherService()}
-                                    imageService={getImageService()}
-                                />
-                            </Suspense>
+                            <PrivateRoute
+                                children={
+                                    <LazyWeatherPage
+                                        weatherService={getWeatherService()}
+                                        imageService={getImageService()}
+                                    />
+                                }
+                            />
                         }
                     />
                     <Route path="*" element={<NotFound />} />

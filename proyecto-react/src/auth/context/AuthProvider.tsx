@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 import { AuthContext } from './AuthContext';
 import { authReducer } from './authReducer';
-import { types } from '../types/types';
+import { AuthAction, AuthActionTypes } from '../types/types';
 
 const init = () => {
     const userString = localStorage.getItem('user');
@@ -17,8 +17,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const login = (name: string) => {
         const user = { id: '1', name };
-        const action = {
-            type: types.login,
+        const action: AuthAction = {
+            type: AuthActionTypes.LOGIN,
             payload: user,
         };
         localStorage.setItem('user', JSON.stringify(user));
@@ -26,8 +26,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const logout = () => {
-        const action = {
-            type: types.logout,
+        const action: AuthAction = {
+            type: AuthActionTypes.LOGOUT,
         };
         localStorage.removeItem('user');
         dispatch(action);
