@@ -6,6 +6,11 @@ export const users = {
             password: '123',
         },
         {
+            id: 5,
+            nombre: 'elena',
+            password: '123',
+        },
+        {
             id: 2,
             nombre: 'user2',
             password: '123',

@@ -22,6 +22,10 @@ export const LoginPage = () => {
         }
     };
 
+    const handleClick = () => {
+        navigate('/');
+    };
+
     return (
         <div className="container-form">
             <Toaster />
@@ -37,6 +41,7 @@ export const LoginPage = () => {
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        disabled={logged}
                     />
                 </div>
                 <div className="input-group">
@@ -49,9 +54,14 @@ export const LoginPage = () => {
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        disabled={logged}
                     />
                 </div>
-                {!logged && <Button>Login</Button>}
+                {logged ? (
+                    <Button onClick={handleClick}>Home</Button>
+                ) : (
+                    <Button>Login</Button>
+                )}{' '}
             </form>
         </div>
     );
