@@ -78,7 +78,7 @@ blockquote {
   overflow: hidden;
 }
 
-.imageCity {
+.image-city {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -101,7 +101,7 @@ blockquote {
   border-radius: 10px;
 }
 
-.navBar {
+.nav-bar {
   position: fixed;
   top: 20px;
   left: 0;
@@ -111,18 +111,18 @@ blockquote {
   padding: 10px;
 }
 
-.elementsNav {
+.elements-nav {
   display: flex;
   width: 100%;
   justify-content: flex-end;}
 
-.nameLogin {
+.name-login {
   color: rgb(0, 0, 0);
   font-size: 20px;
   padding: 10px 10px;
 }
 
-.btnLogout, .btnLogin {
+.btn-logout, .btn-login {
   background-color: #ff1e006a;
   color: white;
   border: none;
@@ -133,7 +133,7 @@ blockquote {
   transition: background-color 0.3s ease;
 }
 
-.btnLogin  {
+.btn-login  {
   background-color: #007bff;
 }
 

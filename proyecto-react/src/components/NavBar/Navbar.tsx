@@ -26,15 +26,15 @@ export const Navbar = () => {
     };
 
     return (
-        <nav className="navBar">
-            <div className="elementsNav">
-                <span className="nameLogin">{user?.name}</span>
+        <nav className="nav-bar">
+            <div className="elements-nav">
+                <span className="name-login">{user?.name}</span>
                 {logged ? (
-                    <button className="btnLogout" onClick={handleLogout}>
+                    <button className="btn-logout" onClick={handleLogout}>
                         Logout
                     </button>
                 ) : (
-                    <button className="btnLogin" onClick={handleClick}>
+                    <button className="btn-login" onClick={handleClick}>
                         {location.pathname === '/login' ? 'Home' : 'Login'}{' '}
                     </button>
                 )}

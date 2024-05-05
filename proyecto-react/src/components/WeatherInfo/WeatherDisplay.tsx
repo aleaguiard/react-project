@@ -19,7 +19,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
                         cityImage && (
                             <div className="image-container">
                                 <img
-                                    className="imageCity"
+                                    className="image-city"
                                     src={cityImage}
                                     alt={description || 'Imagen de la ciudad'}
                                 />
