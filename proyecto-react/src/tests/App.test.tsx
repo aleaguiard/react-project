@@ -24,7 +24,7 @@ describe('App', () => {
     it('Renders NotFound if invalid path', () => {
         renderApp(['/wrong-route']);
         const titleElement = screen.getByRole('heading', { level: 1 });
-        expect(titleElement.textContent).toEqual('Not Found Page');
+        expect(titleElement.textContent).toBe('404 - Page not found');
     });
 
     // Test #3: Verifica si se renderiza correctamente DateComponent con la fecha y la hora actuales.
