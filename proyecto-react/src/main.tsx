@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import * as Sentry from '@sentry/react';
 
@@ -26,8 +26,8 @@ Sentry.init({
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
     <StrictMode>
-        <Router>
+        <BrowserRouter>
             <App />
-        </Router>
+        </BrowserRouter>
     </StrictMode>,
 );

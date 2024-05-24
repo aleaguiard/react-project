@@ -4,24 +4,18 @@ import { AuthContext } from '../../auth/context/AuthContext';
 
 export const Navbar = () => {
     const { user, logout, logged } = useContext(AuthContext);
-
     const navigate = useNavigate();
 
     const handleLogout = () => {
         logout();
-        navigate('/login', {
-            replace: true,
-        });
+        navigate('/login');
     };
+
     const handleClick = () => {
         if (location.pathname === '/login') {
-            navigate('/', {
-                replace: true,
-            });
+            navigate('/');
         } else {
-            navigate('/login', {
-                replace: true,
-            });
+            navigate('/login');
         }
     };
 
