@@ -21,6 +21,13 @@ La aplicación utiliza inyección de dependencias para gestionar y desacoplar se
 - **api/services**: Define servicios que se inyectan en los componentes según sea necesario, como servicios de clima y citas.
 - **React Context**: Utilizado para proporcionar servicios y datos globales a componentes hijos sin necesidad de pasar props manualmente.
 
+## Autenticación
+
+Para acceder a todas las funcionalidades y utilizar los servicios, se requiere autenticación. Puedes utilizar las siguientes credenciales de prueba para iniciar sesión:
+
+- **Usuario**: `admin`
+- **Contraseña**: `123`
+
 ## Instalación
 
 1. Clona el repositorio:
