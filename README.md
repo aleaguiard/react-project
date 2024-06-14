@@ -21,6 +21,13 @@ The application utilizes dependency injection to manage and decouple services ef
 - **api/services**: Defines services that are injected into components as needed, such as weather and quote services.
 - **React Context**: Utilized to provide services and global data to child components without manual prop drilling.
 
+## Authentication
+
+To access all functionalities and use the services, authentication is required. You can use the following mock credentials for login:
+
+- **Username**: admin
+- **Password**: 123
+
 ## Installation
 
 1. Clone the repository:
