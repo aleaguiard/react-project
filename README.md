@@ -25,8 +25,8 @@ The application utilizes dependency injection to manage and decouple services ef
 
 To access all functionalities and use the services, authentication is required. You can use the following mock credentials for login:
 
-- **Username**: admin
-- **Password**: 123
+- **Username**: `admin`
+- **Password**: `123`
 
 ## Installation
 
